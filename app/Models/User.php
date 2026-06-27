@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
+        'skin_type',
+        'hair_type',
+        'city',
     ];
 
     /**
@@ -44,5 +48,27 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function reviewLikes()
+    {
+        return $this->hasMany(ReviewLike::class);
+    }
+
+    // ─── Helpers ─────────────────────────────────────────────
+
+    public function hasLikedReview(Review $review): bool
+    {
+        return $this->reviewLikes()->where('review_id', $review->id)->exists();
+    }
+
+    public function hasReviewedProduct(Product $product): bool
+    {
+        return $this->reviews()->where('product_id', $product->id)->exists();
     }
 }

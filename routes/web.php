@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\Product;
@@ -15,9 +16,14 @@ Route::get('/', function () {
         ->get();
 
     $categories = Category::childrens()->get();
-    $parentCategories = Category::parents()->get();
+    $parentCategories = Category::parents()
+        ->with('children')
+        ->get();
     return view('welcome', compact('categories', 'marques', 'parentCategories'));
 });
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/brands-by-category', function (Request $request) {
     $categorySlug = $request->query('category');

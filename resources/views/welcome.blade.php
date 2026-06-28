@@ -46,7 +46,7 @@
 
                 <!-- Search -->
                 <form
-                    action="#"
+                    action="{{ route('products.index') }}"
                     method="GET"
                     class="mx-auto mt-10 grid max-w-4xl gap-3 rounded-[2rem] border border-border bg-white p-3 shadow-card md:grid-cols-[1.4fr_1fr_1fr_auto]">
 
@@ -134,7 +134,7 @@
             <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($parentCategories as $category)
                 <a
-                    href="#"
+                    href="{{ route('products.index', ['category' => $category->children->first()?->slug]) }}"
                     class="group relative overflow-hidden rounded-card border border-border bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-card">
 
                     <!-- Decorative background -->

@@ -13,13 +13,13 @@
 
         <div class="hidden items-center gap-10 lg:flex">
 
-            <a href="#"
-                class="font-medium text-brown transition hover:text-primary">
+            <a href="{{ url('/') }}"
+                class="font-medium {{ request()->routeIs('welcome') || request()->is('/') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
                 Accueil
             </a>
 
-            <a href="#"
-                class="font-medium text-brown-soft transition hover:text-primary">
+            <a href="{{ route('products.index') }}"
+                class="font-medium {{ request()->routeIs('products.*') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
                 Produits
             </a>
 
@@ -86,8 +86,8 @@
 
         <div class="space-y-4 p-6">
 
-            <a class="block">Accueil</a>
-            <a class="block">Produits</a>
+            <a href="{{ url('/') }}" class="block">Accueil</a>
+            <a href="{{ route('products.index') }}" class="block">Produits</a>
             <a class="block">Catégories</a>
             <a class="block">Marques</a>
 

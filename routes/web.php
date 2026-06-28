@@ -15,8 +15,8 @@ Route::get('/', function () {
         ->get();
 
     $categories = Category::childrens()->get();
-
-    return view('welcome', compact('categories', 'marques'));
+    $parentCategories = Category::parents()->get();
+    return view('welcome', compact('categories', 'marques', 'parentCategories'));
 });
 
 Route::get('/brands-by-category', function (Request $request) {

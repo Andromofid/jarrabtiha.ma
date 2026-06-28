@@ -19,7 +19,7 @@
         <div class="absolute inset-0 bg-gradient-to-b from-primary-soft/40 via-cream to-cream"></div>
         <div class="absolute -top-40 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
 
-        <div class="relative mx-auto flex min-h-[75vh] max-w-6xl items-center justify-center px-6 py-20">
+        <div class="relative mx-auto flex min-h-[75vh] max-w-6xl items-center justify-center px-6 py-10 sm:py-8">
 
             <div class="w-full max-w-4xl text-center">
 
@@ -39,7 +39,7 @@
                 </h1>
 
                 <!-- Subtitle -->
-                <p class="mx-auto mt-8 max-w-2xl text-lg leading-8 text-brown-soft md:text-xl">
+                <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-brown-soft md:text-xl">
                     Recherche un produit, découvre les expériences de vraies utilisatrices
                     marocaines et partage ton propre avis.
                 </p>
@@ -48,7 +48,7 @@
                 <form
                     action="#"
                     method="GET"
-                    class="mx-auto mt-12 grid max-w-4xl gap-3 rounded-[2rem] border border-border bg-white p-3 shadow-card md:grid-cols-[1.4fr_1fr_1fr_auto]">
+                    class="mx-auto mt-10 grid max-w-4xl gap-3 rounded-[2rem] border border-border bg-white p-3 shadow-card md:grid-cols-[1.4fr_1fr_1fr_auto]">
 
                     <input
                         type="search"
@@ -57,9 +57,11 @@
                         class="h-12 rounded-pill border border-border-soft bg-cream px-5 text-sm text-brown placeholder:text-brown-light outline-none transition focus:border-primary focus:ring-0">
 
                     <select
+                        id="category"
                         name="category"
-                        class="h-12 rounded-pill border border-border-soft bg-cream px-5 text-sm text-brown outline-none transition focus:border-primary focus:ring-0">
+                        autocomplete="off">
                         <option value="">Toutes les catégories</option>
+
                         @foreach ($categories as $category)
                         <option value="{{ $category->slug }}">
                             {{ $category->name }}
@@ -67,9 +69,11 @@
                         @endforeach
                     </select>
                     <select
+                        id="brand"
                         name="brand"
                         class="h-12 rounded-pill border border-border-soft bg-cream px-5 text-sm text-brown outline-none transition focus:border-primary focus:ring-0">
                         <option value="">Toutes les marques</option>
+
                         @foreach ($marques as $marque)
                         <option value="{{ $marque->brand }}">
                             {{ $marque->brand }}
@@ -86,33 +90,8 @@
                     </button>
                 </form>
 
-                <!-- Trending -->
-                <div class="mt-8 flex flex-wrap justify-center gap-3">
-
-                    <span class="rounded-full bg-white px-4 py-2 text-sm text-brown-soft shadow-soft">
-                        CeraVe
-                    </span>
-
-                    <span class="rounded-full bg-white px-4 py-2 text-sm text-brown-soft shadow-soft">
-                        Garnier
-                    </span>
-
-                    <span class="rounded-full bg-white px-4 py-2 text-sm text-brown-soft shadow-soft">
-                        Mixa
-                    </span>
-
-                    <span class="rounded-full bg-white px-4 py-2 text-sm text-brown-soft shadow-soft">
-                        Elseve
-                    </span>
-
-                    <span class="rounded-full bg-white px-4 py-2 text-sm text-brown-soft shadow-soft">
-                        La Roche-Posay
-                    </span>
-
-                </div>
-
                 <!-- Stats -->
-                <div class="mt-14 flex flex-wrap justify-center gap-10">
+                <div class="mt-10 flex flex-wrap justify-center gap-10">
 
                     <div>
                         <p class="font-display text-3xl font-bold text-primary">
@@ -201,7 +180,37 @@
     </main>
 
     @include('layouts.footer')
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const categorySelect = document.getElementById("category");
+            const brandSelect = document.getElementById("brand");
 
+            if (!categorySelect || !brandSelect) return;
+
+            categorySelect.addEventListener("change", async () => {
+                const category = categorySelect.value;
+
+                brandSelect.innerHTML = `<option value="">Chargement...</option>`;
+
+                if (!category) {
+                    brandSelect.innerHTML = `<option value="">Toutes les marques</option>`;
+                    return;
+                }
+
+                const response = await fetch(`/brands-by-category?category=${encodeURIComponent(category)}`);
+                const brands = await response.json();
+
+                brandSelect.innerHTML = `<option value="">Toutes les marques</option>`;
+
+                brands.forEach((brand) => {
+                    const option = document.createElement("option");
+                    option.value = brand;
+                    option.textContent = brand;
+                    brandSelect.appendChild(option);
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

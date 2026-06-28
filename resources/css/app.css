@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.ts-wrapper.single .ts-control {
+    @apply h-12 rounded-pill border border-border-soft bg-cream px-4 text-sm shadow-none;
+}
+
+.ts-wrapper.focus .ts-control {
+    @apply border-primary ring-0;
+}
+
+.ts-dropdown {
+    @apply rounded-2xl border border-border bg-white shadow-card;
+}
+
+.ts-dropdown .active {
+    @apply bg-primary-soft text-brown;
+}
+
+.ts-control input {
+    @apply text-sm;
+}

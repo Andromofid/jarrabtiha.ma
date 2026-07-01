@@ -158,7 +158,7 @@
             </div>
 
             <aside class="space-y-6">
-                <section class="rounded-2xl bg-brown p-6 text-white shadow-card">
+                <!-- <section class="rounded-2xl bg-brown p-6 text-white shadow-card">
                     <h2 class="text-2xl font-bold">جربتي شي منتج؟</h2>
                     <p class="mt-3 text-sm leading-6 text-white/70">
                         Partage ton avis et aide la communauté à choisir les bons produits.
@@ -169,7 +169,7 @@
                         class="mt-6 inline-flex rounded-pill bg-primary px-6 py-3 text-sm font-bold text-white transition hover:bg-primary-hover">
                         Ajouter mon avis
                     </a>
-                </section>
+                </section> -->
 
                 <section>
                     <div class="mb-4">

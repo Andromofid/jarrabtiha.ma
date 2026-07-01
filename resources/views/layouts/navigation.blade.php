@@ -64,6 +64,15 @@
                 Dashboard
 
             </a>
+            <!-- logout -->
+            <form action="{{ route('logout') }}" method="POST" class="inline">
+                @csrf
+                <button
+                    type="submit"
+                    class="rounded-pill bg-danger px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-danger-hover">
+                    Déconnexion
+                </button>
+            </form>
 
             @endguest
 

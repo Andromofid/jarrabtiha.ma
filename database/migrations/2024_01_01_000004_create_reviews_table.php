@@ -28,9 +28,6 @@ return new class extends Migration
             $table->boolean('verified')->default(false);
             $table->unsignedInteger('likes_count')->default(0); // cached
             $table->timestamps();
-
-            // مراجعة واحدة فقط لكل مستخدم لكل منتج
-            $table->unique(['user_id', 'product_id']);
         });
     }
 

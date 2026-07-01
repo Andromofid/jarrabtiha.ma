@@ -12,6 +12,13 @@ class Review extends Model
     protected $fillable = [
         'user_id',
         'product_id',
+
+        'guest_name',
+        'guest_email',
+        'guest_phone',
+        'guest_token',
+        'ip_address',
+
         'rating',
         'title',
         'body',
@@ -19,16 +26,18 @@ class Review extends Model
         'skin_type',
         'hair_type',
         'would_recommend',
+
         'verified',
+        'is_approved',
         'likes_count',
     ];
-
     protected function casts(): array
     {
         return [
             'would_recommend' => 'boolean',
             'verified'        => 'boolean',
             'rating'          => 'integer',
+            'is_approved'     => 'boolean',
         ];
     }
 
@@ -36,7 +45,9 @@ class Review extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault([
+            'name' => $this->guest_name ?? 'Utilisatrice',
+        ]);
     }
 
     public function product()
@@ -70,6 +81,10 @@ class Review extends Model
     {
         return $query->orderByDesc('likes_count');
     }
+    public function scopeApproved($query)
+    {
+        return $query->where('is_approved', true);
+    }
 
     // ─── Helpers ─────────────────────────────────────────────
 
@@ -82,7 +97,7 @@ class Review extends Model
 
     public function getResultDurationLabelAttribute(): string
     {
-        return match($this->result_duration) {
+        return match ($this->result_duration) {
             '1week'   => '1 semaine',
             '2weeks'  => '2 semaines',
             '1month'  => '1 mois',

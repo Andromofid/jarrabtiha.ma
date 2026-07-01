@@ -29,7 +29,7 @@
             <div class="relative grid gap-6 p-4 md:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:p-8">
                 <div class="overflow-hidden rounded-2xl bg-primary-soft/40">
                     <img
-                        src="{{ $product->image ?: asset('logo.png') }}"
+                        src="{{$product->image ? asset('storage/' . $product->image):asset('logo.png') }}"
                         alt="{{ $product->name }}"
                         class="h-56 w-full object-cover sm:h-72 lg:h-80">
                 </div>
@@ -250,7 +250,7 @@
                             class="flex gap-3 rounded-2xl border border-border bg-white p-3 shadow-soft transition hover:-translate-y-1 hover:border-primary/30 hover:shadow-card">
 
                             <img
-                                src="{{ $relatedProduct->image ?: asset('logo.png') }}"
+                                src="{{$relatedProduct->image ? asset('storage/' . $relatedProduct->image):asset('logo.png') }}"
                                 alt="{{ $relatedProduct->name }}"
                                 class="h-20 w-20 shrink-0 rounded-xl object-cover">
 

@@ -46,7 +46,7 @@
 
                     <div class="relative h-32 overflow-hidden bg-primary-soft/40 sm:h-36 md:h-40">
                         <img
-                            src="{{ $product->image ?: asset('logo.png') }}"
+                            src="{{$product->image ? asset('storage/' . $product->image):asset('logo.png') }}"
                             alt="{{ $product->name }}"
                             class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
 

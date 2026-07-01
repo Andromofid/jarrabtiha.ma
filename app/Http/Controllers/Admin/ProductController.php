@@ -19,8 +19,8 @@ class ProductController extends Controller
         $selectedBrand = $request->string('brand')->trim()->toString();
 
         $products = Product::with('category')
-            ->when($selectedCategory !== '', fn ($query) => $query->where('category_id', $selectedCategory))
-            ->when($selectedBrand !== '', fn ($query) => $query->where('brand', $selectedBrand))
+            ->when($selectedCategory !== '', fn($query) => $query->where('category_id', $selectedCategory))
+            ->when($selectedBrand !== '', fn($query) => $query->where('brand', $selectedBrand))
             ->latest()
             ->get();
 
@@ -55,7 +55,7 @@ class ProductController extends Controller
             'slug' => ['nullable', 'string', 'max:255', 'unique:products,slug'],
             'brand' => ['nullable', 'string', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
-            'image' => ['nullable', 'string', 'max:255'],
+            'image' => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp', 'max:255'],
             'description' => ['nullable', 'string'],
             'where_to_buy' => ['nullable', 'string', 'max:255'],
             'is_approved' => ['nullable', 'boolean'],
@@ -64,7 +64,13 @@ class ProductController extends Controller
         $validated['slug'] = Str::slug($validated['slug'] ?: $validated['name']);
         $validated['is_approved'] = $request->boolean('is_approved');
 
-        Product::create($validated);
+        $product = Product::create($validated);
+        if ($request->hasFile('image')) {
+            $path = $request->image->store('products', 'public');
+            $product->update([
+                'image' => $path,
+            ]);
+        }
 
         return redirect()
             ->route('admin.products.index')
@@ -85,7 +91,7 @@ class ProductController extends Controller
             'slug' => ['nullable', 'string', 'max:255', Rule::unique('products', 'slug')->ignore($product->id)],
             'brand' => ['nullable', 'string', 'max:255'],
             'category_id' => ['required', 'exists:categories,id'],
-            'image' => ['nullable', 'string', 'max:255'],
+            'image' => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp', 'max:255'],
             'description' => ['nullable', 'string'],
             'where_to_buy' => ['nullable', 'string', 'max:255'],
             'is_approved' => ['nullable', 'boolean'],
@@ -95,6 +101,13 @@ class ProductController extends Controller
         $validated['is_approved'] = $request->boolean('is_approved');
 
         $product->update($validated);
+
+        if ($request->hasFile('image')) {
+            $path = $request->image->store('products', 'public');
+            $product->update([
+                'image' => $path,
+            ]);
+        }
 
         return redirect()
             ->route('admin.products.index')

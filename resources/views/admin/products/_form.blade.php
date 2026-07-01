@@ -28,7 +28,7 @@
 
     <div class="field full">
         <label for="image">Image Path</label>
-        <input id="image" type="text" name="image" value="{{ old('image', $product->image ?? '') }}" placeholder="Example: products/item.jpg">
+        <input id="image" type="file" name="image" value="{{ old('image', $product->image ?? '') }}" placeholder="Example: products/item.jpg">
     </div>
 
     <div class="field full">

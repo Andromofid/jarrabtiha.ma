@@ -13,7 +13,7 @@
 
 <body class="min-h-screen bg-cream text-brown font-sans antialiased">
     @include('layouts.navigation')
-
+    @include('components.flash-messages')
     <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
         <div class="mb-6">
             <a
@@ -155,6 +155,73 @@
                     </p>
                 </div>
                 @endforelse
+                {{-- Write Review --}}
+                <div class="my-4 rounded-2xl border border-border bg-white p-6 shadow-soft">
+                    <h3 class="text-2xl font-bold text-brown">
+                        Écrire un avis
+                    </h3>
+
+                    <p class="mt-2 text-sm text-brown-soft">
+                        Partagez votre expérience avec ce produit.
+                    </p>
+
+                    <form method="POST" action="{{ route('reviews.store', $product) }}" class="mt-6 space-y-5">
+                        @csrf
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-brown">Note</label>
+                            <select name="rating" required
+                                class="w-full rounded-xl border-border focus:border-primary focus:ring-primary">
+                                <option value="">Choisir une note</option>
+                                <option value="5">★★★★★ - Excellent</option>
+                                <option value="4">★★★★☆ - Très bien</option>
+                                <option value="3">★★★☆☆ - Moyen</option>
+                                <option value="2">★★☆☆☆ - Pas terrible</option>
+                                <option value="1">★☆☆☆☆ - Mauvais</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-brown">Titre</label>
+                            <input type="text" name="title" value="{{ old('title') }}"
+                                placeholder="Ex: Très bon produit pour cheveux secs"
+                                class="w-full rounded-xl border-border focus:border-primary focus:ring-primary">
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-brown">Votre avis</label>
+                            <textarea name="body" rows="5" required
+                                placeholder="Dites-nous ce que vous avez aimé ou pas..."
+                                class="w-full rounded-xl border-border focus:border-primary focus:ring-primary">{{ old('body') }}</textarea>
+                        </div>
+
+                        <div class="grid gap-4 md:grid-cols-3">
+                            <div>
+                                <label class="mb-2 block text-sm font-semibold text-brown">Durée du test</label>
+                                <select name="result_duration" required
+                                    class="w-full rounded-xl border-border focus:border-primary focus:ring-primary">
+                                    <option value="">Choisir</option>
+                                    <option value="1week">1 semaine</option>
+                                    <option value="2weeks">2 semaines</option>
+                                    <option value="1month">1 mois</option>
+                                    <option value="3months">3 mois</option>
+                                    <option value="more">Plus de 3 mois</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <label class="flex items-center gap-3 text-sm font-semibold text-brown">
+                            <input type="checkbox" name="would_recommend" value="1"
+                                class="rounded border-border text-primary focus:ring-primary">
+                            Je recommande ce produit
+                        </label>
+
+                        <button type="submit"
+                            class="rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-brown">
+                            Publier mon avis
+                        </button>
+                    </form>
+                </div>
             </div>
 
             <aside class="space-y-6">

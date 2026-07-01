@@ -17,11 +17,12 @@
 
         <div class="w-full max-w-md">
 
-            
 
             {{-- Card --}}
             <div class="overflow-hidden rounded-card border border-border bg-white shadow-card">
                 <div class="p-8">
+                    @include('components.flash-messages')
+
                     {{ $slot }}
                 </div>
             </div>

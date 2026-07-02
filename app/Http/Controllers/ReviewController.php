@@ -22,11 +22,11 @@ class ReviewController extends Controller
             ->where('product_id', $product->id)
             ->exists();
 
-        if ($alreadyReviewed) {
-            return back()
-                ->withErrors(['review' => 'Vous avez déjà donné votre avis sur ce produit.'])
-                ->withInput();
-        }
+        // if ($alreadyReviewed) {
+        //     return back()
+        //         ->withErrors(['review' => 'Vous avez déjà donné votre avis sur ce produit.'])
+        //         ->withInput();
+        // }
 
         Review::create([
             'user_id' => auth()->id(),

@@ -100,7 +100,8 @@
                         <div>
                             <div class="flex items-center gap-3">
                                 <h3 class="text-lg font-semibold text-brown">
-                                    {{ $review->title ?: 'Avis utilisateur' }}
+                                    {{ $review->user?->name ?? 'Membre de la communauté' }}
+
                                 </h3>
 
                                 @if ($review->verified)
@@ -111,13 +112,12 @@
                             </div>
 
                             <p class="mt-1 text-sm text-brown-soft">
-                                Par {{ $review->user?->name ?? 'Membre de la communauté' }} • {{ $review->created_at?->format('d/m/Y') }}
+                                {{ $review->created_at?->format('d/m/Y') }}
                             </p>
                         </div>
 
                         <div class="rounded-xl bg-cream px-3 py-2 text-right">
                             <p class="text-base font-semibold text-primary">{{ $review->stars }}</p>
-                            <p class="text-xs text-brown-soft">{{ $review->likes_count }} j'aime</p>
                         </div>
                     </div>
 
@@ -125,27 +125,30 @@
                         {{ $review->body ?: 'Aucun détail supplémentaire n’a été partagé pour cet avis.' }}
                     </p>
 
-                    <div class="mt-4 flex flex-wrap gap-2 text-xs">
-                        @if ($review->skin_type)
-                        <span class="rounded-full border border-border bg-cream px-3 py-2 text-brown-soft">
-                            Peau : {{ $review->skin_type }}
-                        </span>
-                        @endif
+                    <div class="mt-4 flex flex-wrap gap-2 text-xs items-center justify-between">
+                        <div>
+                            <span class="rounded-full border border-border bg-cream px-3 py-2 text-brown-soft">
+                                Durée du test : {{ $review->result_duration_label }}
+                            </span>
+                            @if ($review->would_recommend )
+                            <span class="rounded-full border border-border bg-cream ml-2 px-3 py-2 {{ $review->would_recommend ? 'text-primary' : 'text-brown-soft' }}">
+                                Recommandé
+                            </span>
+                            @endif
+                        </div>
+                        <!-- likes -->
+                        <form action="">
+                            <button type="button" class="rounded-full border border-border bg-cream px-3 py-2 text-brown-soft hover:bg-primary-soft hover:text-primary transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 inline-block">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                                {{ $review->likes_count }}
+                            </button>
+                        </form>
 
-                        @if ($review->hair_type)
-                        <span class="rounded-full border border-border bg-cream px-3 py-2 text-brown-soft">
-                            Cheveux : {{ $review->hair_type }}
-                        </span>
-                        @endif
-
-                        <span class="rounded-full border border-border bg-cream px-3 py-2 text-brown-soft">
-                            Résultats : {{ $review->result_duration_label }}
-                        </span>
-
-                        <span class="rounded-full border border-border bg-cream px-3 py-2 {{ $review->would_recommend ? 'text-primary' : 'text-brown-soft' }}">
-                            {{ $review->would_recommend ? 'Recommandé' : 'Pas recommandé' }}
-                        </span>
                     </div>
+
+
                 </article>
                 @empty
                 <div class="rounded-2xl border border-dashed border-border bg-white px-6 py-12 text-center shadow-soft">
@@ -165,61 +168,97 @@
                         Partagez votre expérience avec ce produit.
                     </p>
 
-                    <form method="POST" action="{{ route('reviews.store', $product) }}" class="mt-6 space-y-5">
+                    <form method="POST" action="{{ route('reviews.store', $product) }}" class="mt-8">
                         @csrf
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-brown">Note</label>
-                            <select name="rating" required
-                                class="w-full rounded-xl border-border focus:border-primary focus:ring-primary">
-                                <option value="">Choisir une note</option>
-                                <option value="5">★★★★★ - Excellent</option>
-                                <option value="4">★★★★☆ - Très bien</option>
-                                <option value="3">★★★☆☆ - Moyen</option>
-                                <option value="2">★★☆☆☆ - Pas terrible</option>
-                                <option value="1">★☆☆☆☆ - Mauvais</option>
-                            </select>
-                        </div>
 
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-brown">Titre</label>
-                            <input type="text" name="title" value="{{ old('title') }}"
-                                placeholder="Ex: Très bon produit pour cheveux secs"
-                                class="w-full rounded-xl border-border focus:border-primary focus:ring-primary">
-                        </div>
+                        {{-- ÉTAPE 1 — Note --}}
+                        <div
+                            x-data="{ rating: {{ old('rating', 0) }} }"
+                            class="space-y-2">
 
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-brown">Votre avis</label>
-                            <textarea name="body" rows="5" required
-                                placeholder="Dites-nous ce que vous avez aimé ou pas..."
-                                class="w-full rounded-xl border-border focus:border-primary focus:ring-primary">{{ old('body') }}</textarea>
-                        </div>
+                            <input type="hidden" name="rating" :value="rating">
 
-                        <div class="grid gap-4 md:grid-cols-3">
-                            <div>
-                                <label class="mb-2 block text-sm font-semibold text-brown">Durée du test</label>
-                                <select name="result_duration" required
-                                    class="w-full rounded-xl border-border focus:border-primary focus:ring-primary">
-                                    <option value="">Choisir</option>
-                                    <option value="1week">1 semaine</option>
-                                    <option value="2weeks">2 semaines</option>
-                                    <option value="1month">1 mois</option>
-                                    <option value="3months">3 mois</option>
-                                    <option value="more">Plus de 3 mois</option>
-                                </select>
+                            {{-- Note étoiles --}}
+                            <div class="rounded-2xl border border-[#F2D0C4] bg-[#FDF8F5] p-6 text-center">
+                                <p class="text-sm font-semibold text-[#3D1F1F] mb-4">
+                                    Comment notez-vous ce produit ?
+                                </p>
+
+                                <div class="flex justify-center gap-3">
+                                    <template x-for="star in 5" :key="star">
+                                        <button
+                                            type="button"
+                                            @click="rating = star"
+                                            class="text-5xl transition-transform duration-150 hover:scale-125 focus:outline-none"
+                                            :class="star <= rating ? 'text-[#C9956C]' : 'text-[#F2D0C4]'">
+                                            ★
+                                        </button>
+                                    </template>
+                                </div>
                             </div>
 
+                            {{-- Expérience --}}
+                            <div>
+                                <label class="block text-sm font-semibold text-[#3D1F1F] mb-2">
+                                    Votre expérience
+                                </label>
+                                <textarea
+                                    name="body"
+                                    rows="4"
+                                    required
+                                    placeholder="Partager m3ana tajribtk... Wach nfa3 m3ak? Chnou 3jbk w chnou ma 3jbkch?"
+                                    class="w-full rounded-2xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 text-sm text-[#3D1F1F] placeholder-[#C9956C]/50 focus:border-[#C9956C] focus:ring-1 focus:ring-[#C9956C] focus:outline-none resize-none transition">{{ old('body') }}</textarea>
+                            </div>
+
+                            {{-- Durée + Recommande — côte à côte sur desktop --}}
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                                {{-- Durée d'utilisation --}}
+                                <div>
+                                    <label class="block text-sm font-semibold text-[#3D1F1F] mb-2">
+                                        Durée d'utilisation
+                                    </label>
+                                    <select
+                                        name="result_duration"
+                                        required
+                                        class="w-full rounded-xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 text-sm text-[#3D1F1F] focus:border-[#C9956C] focus:ring-1 focus:ring-[#C9956C] focus:outline-none transition">
+                                        <option value="">Choisir...</option>
+                                        <option value="1week" {{ old('result_duration') == '1week'   ? 'selected' : '' }}>1 semaine</option>
+                                        <option value="2weeks" {{ old('result_duration') == '2weeks'  ? 'selected' : '' }}>2 semaines</option>
+                                        <option value="1month" {{ old('result_duration') == '1month'  ? 'selected' : '' }}>1 mois</option>
+                                        <option value="3months" {{ old('result_duration') == '3months' ? 'selected' : '' }}>3 mois</option>
+                                        <option value="more" {{ old('result_duration') == 'more'    ? 'selected' : '' }}>+ de 3 mois</option>
+                                    </select>
+                                </div>
+
+                                {{-- Recommande --}}
+                                <div>
+                                    <label class="block text-sm font-semibold text-[#3D1F1F] mb-2">
+                                        Recommandation
+                                    </label>
+                                    <label class="flex items-center gap-3 w-full rounded-xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 cursor-pointer hover:border-[#C9956C] transition">
+                                        <input
+                                            type="checkbox"
+                                            name="would_recommend"
+                                            value="1"
+                                            {{ old('would_recommend') ? 'checked' : '' }}
+                                            class="h-5 w-5 rounded border-[#F2D0C4] text-[#C9956C] focus:ring-[#C9956C]">
+                                        <span class="text-sm text-[#3D1F1F]">
+                                            Je recommande ce produit 👍
+                                        </span>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            {{-- Submit --}}
+                            <button
+                                type="submit"
+                                class="w-full rounded-2xl bg-[#C9956C] py-4 text-sm font-semibold text-[#FDF8F5] shadow-md hover:bg-[#3D1F1F] transition-colors duration-200">
+                                Publier mon avis
+                            </button>
+
                         </div>
-
-                        <label class="flex items-center gap-3 text-sm font-semibold text-brown">
-                            <input type="checkbox" name="would_recommend" value="1"
-                                class="rounded border-border text-primary focus:ring-primary">
-                            Je recommande ce produit
-                        </label>
-
-                        <button type="submit"
-                            class="rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-brown">
-                            Publier mon avis
-                        </button>
                     </form>
                 </div>
             </div>

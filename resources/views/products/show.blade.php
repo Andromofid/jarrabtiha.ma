@@ -23,70 +23,95 @@
             </a>
         </div>
 
-        <section class="relative overflow-hidden rounded-[1.5rem] border border-border bg-white shadow-card">
-            <div class="absolute inset-0 bg-gradient-to-br from-primary-soft/25 via-white to-cream"></div>
+        <section class="rounded-3xl border border-border bg-white p-3 shadow-soft sm:p-4">
+            <div class="flex gap-3 sm:gap-5">
 
-            <div class="relative grid gap-6 p-4 md:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:p-8">
-                <div class="overflow-hidden rounded-2xl bg-primary-soft/40">
-                    <img
-                        src="{{$product->image ? asset('storage/' . $product->image):asset('logo.png') }}"
-                        alt="{{ $product->name }}"
-                        class="h-56 w-full object-cover sm:h-72 lg:h-80">
+                {{-- Image --}}
+                <div class="shrink-0">
+                    <div class="h-28 w-24 overflow-hidden rounded-2xl bg-primary-soft/40 sm:h-36 sm:w-32 md:h-40 md:w-36">
+                        <img
+                            src="{{ $product->image ? asset('storage/' . $product->image) : asset('logo.png') }}"
+                            alt="{{ $product->name }}"
+                            class="h-full w-full object-cover">
+                    </div>
                 </div>
 
-                <div class="flex flex-col justify-center">
-                    <div class="inline-flex w-fit items-center rounded-full border border-primary/20 bg-white px-4 py-2 text-xs font-semibold text-primary shadow-soft">
-                        {{ $product->category?->parent?->name ?? 'Beauté' }}
+                {{-- Content --}}
+                <div class="min-w-0 flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="rounded-full border border-primary/20 bg-white px-2.5 py-1 text-[10px] font-semibold text-primary">
+                            {{ $product->category?->parent?->name ?? 'Beauté' }}
+                        </span>
+
+                        @if($product->category)
+                        <span class="hidden rounded-full bg-cream px-2.5 py-1 text-[10px] font-semibold text-brown-soft sm:inline-flex">
+                            {{ $product->category->name }}
+                        </span>
+                        @endif
                     </div>
 
-                    <p class="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                    <p class="mt-2 text-[10px] font-bold uppercase tracking-[0.18em] text-primary">
                         {{ $product->brand ?: 'Marque non précisée' }}
                     </p>
 
-                    <h1 class="mt-2 text-3xl font-bold leading-tight text-brown lg:text-4xl">
+                    <h1 class="mt-1 line-clamp-2 text-lg font-bold leading-tight text-brown sm:text-2xl md:text-3xl">
                         {{ $product->name }}
                     </h1>
 
-                    <div class="mt-6 grid grid-cols-3 gap-3">
-                        <div class="rounded-2xl border border-border bg-cream p-3 text-center">
-                            <p class="text-xs text-brown-soft">Note</p>
-                            <p class="mt-1 text-2xl font-bold text-primary">
-                                {{ number_format($product->rating_avg ?? 0, 1) }}
-                            </p>
+                    @php
+                    $avg = round($product->rating_avg ?? 0);
+                    @endphp
+
+                    <div class="mt-2 flex flex-wrap items-center gap-2">
+                        <div class="flex text-sm text-yellow-400 sm:text-base">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <span class="{{ $i <= $avg ? 'text-yellow-400' : 'text-gray-300' }}">★</span>
+                                @endfor
                         </div>
 
-                        <div class="rounded-2xl border border-border bg-cream p-3 text-center">
-                            <p class="text-xs text-brown-soft">Avis</p>
-                            <p class="mt-1 text-2xl font-bold text-primary">
-                                {{ $product->rating_count }}
-                            </p>
-                        </div>
+                        <span class="text-xs font-bold text-brown">
+                            {{ number_format($product->rating_avg ?? 0, 1) }}
+                        </span>
 
-                        <div class="rounded-2xl border border-border bg-cream p-3 text-center">
-                            <p class="text-xs text-brown-soft">Catégorie</p>
-                            <p class="mt-1 line-clamp-2 text-sm font-semibold text-brown">
-                                {{ $product->category?->name ?? 'Beauté' }}
-                            </p>
-                        </div>
+                        <span class="text-xs text-brown-soft">
+                            ({{ $product->rating_count }} avis)
+                        </span>
                     </div>
 
+                    {{-- Buttons --}}
+                    <div class="mt-3 flex flex-wrap gap-2">
 
-                    <div class="mt-6 flex flex-wrap items-center justify-end gap-3">
                         <a
-                            href=""
+                            href="{{ $product->where_to_buy }}"
                             target="_blank"
                             rel="noreferrer"
-                            class="inline-flex rounded-pill bg-primary px-12 py-3 text-sm font-bold text-white transition hover:bg-primary-hover">
+                            class="rounded-full bg-primary px-4 py-2 text-[11px] font-bold text-white transition hover:bg-primary-hover">
                             Acheter
                         </a>
-                    </div>
 
+                        <button
+                            type="button"
+                            onclick="openReviewForm()"
+                            class="rounded-full border border-primary bg-white px-4 py-2 text-[11px] font-bold text-primary transition hover:bg-primary hover:text-white">
+                            Jarrabti le produit ?
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
 
+        {{-- Sticky mobile button --}}
+        <a
+            onclick="openReviewForm()"
+            id="sticky-review-button"
+            class="fixed bottom-4 left-4 right-4 z-50 rounded-full bg-primary py-3 text-center text-sm font-bold text-white shadow-card md:hidden">
+            Jarrabti le produit ?
+        </a>
+
         <section class="mt-12 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+
             <div>
+
                 <div class="mb-6">
                     <h2 class="text-3xl font-bold text-brown">Avis de la communauté</h2>
                     <p class="mt-2 text-base text-brown-soft">
@@ -111,7 +136,7 @@
                                 @endif
                             </div>
 
-                            <p class="mt-1 text-sm text-brown-soft">
+                            <p class="mt-1 text-sm text-brown-soft flex items-center gap-2">
                                 {{ $review->created_at?->format('d/m/Y') }}
                             </p>
                         </div>
@@ -127,24 +152,25 @@
 
                     <div class="mt-4 flex flex-wrap gap-2 text-xs items-center justify-between">
                         <div>
-                            <span class="rounded-full border border-border bg-cream px-3 py-2 text-brown-soft">
+                            <span class="rounded-full border border-border bg-cream px-3 py-2 text-brown-soft ">
                                 Durée du test : {{ $review->result_duration_label }}
                             </span>
                             @if ($review->would_recommend )
-                            <span class="rounded-full border border-border bg-cream ml-2 px-3 py-2 {{ $review->would_recommend ? 'text-primary' : 'text-brown-soft' }}">
+                            <span class="rounded-full border border-border bg-cream px-3 py-2 ml-2 text-brown-soft">
                                 Recommandé
                             </span>
                             @endif
                         </div>
                         <!-- likes -->
-                        <form action="">
-                            <button type="button" class="rounded-full border border-border bg-cream px-3 py-2 text-brown-soft hover:bg-primary-soft hover:text-primary transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 inline-block">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        <!-- <form action="">
+                            <button type="button" class="flex items-center gap-2 rounded-full border border-border bg-cream px-3 py-2 text-brown-soft hover:bg-primary-soft hover:text-primary transition">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.62436 4.4241C3.96537 5.18243 2.75 6.98614 2.75 9.13701C2.75 11.3344 3.64922 13.0281 4.93829 14.4797C6.00072 15.676 7.28684 16.6675 8.54113 17.6345C8.83904 17.8642 9.13515 18.0925 9.42605 18.3218C9.95208 18.7365 10.4213 19.1004 10.8736 19.3647C11.3261 19.6292 11.6904 19.7499 12 19.7499C12.3096 19.7499 12.6739 19.6292 13.1264 19.3647C13.5787 19.1004 14.0479 18.7365 14.574 18.3218C14.8649 18.0925 15.161 17.8642 15.4589 17.6345C16.7132 16.6675 17.9993 15.676 19.0617 14.4797C20.3508 13.0281 21.25 11.3344 21.25 9.13701C21.25 6.98614 20.0346 5.18243 18.3756 4.4241C16.7639 3.68739 14.5983 3.88249 12.5404 6.02065C12.399 6.16754 12.2039 6.25054 12 6.25054C11.7961 6.25054 11.601 6.16754 11.4596 6.02065C9.40166 3.88249 7.23607 3.68739 5.62436 4.4241ZM12 4.45873C9.68795 2.39015 7.09896 2.10078 5.00076 3.05987C2.78471 4.07284 1.25 6.42494 1.25 9.13701C1.25 11.8025 2.3605 13.836 3.81672 15.4757C4.98287 16.7888 6.41022 17.8879 7.67083 18.8585C7.95659 19.0785 8.23378 19.292 8.49742 19.4998C9.00965 19.9036 9.55954 20.3342 10.1168 20.6598C10.6739 20.9853 11.3096 21.2499 12 21.2499C12.6904 21.2499 13.3261 20.9853 13.8832 20.6598C14.4405 20.3342 14.9903 19.9036 15.5026 19.4998C15.7662 19.292 16.0434 19.0785 16.3292 18.8585C17.5898 17.8879 19.0171 16.7888 20.1833 15.4757C21.6395 13.836 22.75 11.8025 22.75 9.13701C22.75 6.42494 21.2153 4.07284 18.9992 3.05987C16.901 2.10078 14.3121 2.39015 12 4.45873Z" fill="#3B2A27" />
                                 </svg>
+
                                 {{ $review->likes_count }}
                             </button>
-                        </form>
+                        </form> -->
 
                     </div>
 
@@ -159,108 +185,7 @@
                 </div>
                 @endforelse
                 {{-- Write Review --}}
-                <div class="my-4 rounded-2xl border border-border bg-white p-6 shadow-soft">
-                    <h3 class="text-2xl font-bold text-brown">
-                        Écrire un avis
-                    </h3>
-
-                    <p class="mt-2 text-sm text-brown-soft">
-                        Partagez votre expérience avec ce produit.
-                    </p>
-
-                    <form method="POST" action="{{ route('reviews.store', $product) }}" class="mt-8">
-                        @csrf
-
-                        {{-- ÉTAPE 1 — Note --}}
-                        <div
-                            x-data="{ rating: {{ old('rating', 0) }} }"
-                            class="space-y-2">
-
-                            <input type="hidden" name="rating" :value="rating">
-
-                            {{-- Note étoiles --}}
-                            <div class="rounded-2xl border border-[#F2D0C4] bg-[#FDF8F5] p-6 text-center">
-                                <p class="text-sm font-semibold text-[#3D1F1F] mb-4">
-                                    Comment notez-vous ce produit ?
-                                </p>
-
-                                <div class="flex justify-center gap-3">
-                                    <template x-for="star in 5" :key="star">
-                                        <button
-                                            type="button"
-                                            @click="rating = star"
-                                            class="text-5xl transition-transform duration-150 hover:scale-125 focus:outline-none"
-                                            :class="star <= rating ? 'text-[#C9956C]' : 'text-[#F2D0C4]'">
-                                            ★
-                                        </button>
-                                    </template>
-                                </div>
-                            </div>
-
-                            {{-- Expérience --}}
-                            <div>
-                                <label class="block text-sm font-semibold text-[#3D1F1F] mb-2">
-                                    Votre expérience
-                                </label>
-                                <textarea
-                                    name="body"
-                                    rows="4"
-                                    required
-                                    placeholder="Partager m3ana tajribtk... Wach nfa3 m3ak? Chnou 3jbk w chnou ma 3jbkch?"
-                                    class="w-full rounded-2xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 text-sm text-[#3D1F1F] placeholder-[#C9956C]/50 focus:border-[#C9956C] focus:ring-1 focus:ring-[#C9956C] focus:outline-none resize-none transition">{{ old('body') }}</textarea>
-                            </div>
-
-                            {{-- Durée + Recommande — côte à côte sur desktop --}}
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                                {{-- Durée d'utilisation --}}
-                                <div>
-                                    <label class="block text-sm font-semibold text-[#3D1F1F] mb-2">
-                                        Durée d'utilisation
-                                    </label>
-                                    <select
-                                        name="result_duration"
-                                        required
-                                        class="w-full rounded-xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 text-sm text-[#3D1F1F] focus:border-[#C9956C] focus:ring-1 focus:ring-[#C9956C] focus:outline-none transition">
-                                        <option value="">Choisir...</option>
-                                        <option value="1week" {{ old('result_duration') == '1week'   ? 'selected' : '' }}>1 semaine</option>
-                                        <option value="2weeks" {{ old('result_duration') == '2weeks'  ? 'selected' : '' }}>2 semaines</option>
-                                        <option value="1month" {{ old('result_duration') == '1month'  ? 'selected' : '' }}>1 mois</option>
-                                        <option value="3months" {{ old('result_duration') == '3months' ? 'selected' : '' }}>3 mois</option>
-                                        <option value="more" {{ old('result_duration') == 'more'    ? 'selected' : '' }}>+ de 3 mois</option>
-                                    </select>
-                                </div>
-
-                                {{-- Recommande --}}
-                                <div>
-                                    <label class="block text-sm font-semibold text-[#3D1F1F] mb-2">
-                                        Recommandation
-                                    </label>
-                                    <label class="flex items-center gap-3 w-full rounded-xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 cursor-pointer hover:border-[#C9956C] transition">
-                                        <input
-                                            type="checkbox"
-                                            name="would_recommend"
-                                            value="1"
-                                            {{ old('would_recommend') ? 'checked' : '' }}
-                                            class="h-5 w-5 rounded border-[#F2D0C4] text-[#C9956C] focus:ring-[#C9956C]">
-                                        <span class="text-sm text-[#3D1F1F]">
-                                            Je recommande ce produit 👍
-                                        </span>
-                                    </label>
-                                </div>
-
-                            </div>
-
-                            {{-- Submit --}}
-                            <button
-                                type="submit"
-                                class="w-full rounded-2xl bg-[#C9956C] py-4 text-sm font-semibold text-[#FDF8F5] shadow-md hover:bg-[#3D1F1F] transition-colors duration-200">
-                                Publier mon avis
-                            </button>
-
-                        </div>
-                    </form>
-                </div>
+                <x-review-form :product="$product" />
             </div>
 
             <aside class="space-y-6">
@@ -319,6 +244,35 @@
     </main>
 
     @include('layouts.footer')
+    <script>
+        const formSection = document.getElementById('review-form');
+        const stickyButton = document.getElementById('sticky-review-button');
+
+        function openReviewForm() {
+            if (!formSection) return;
+
+            formSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+
+        function toggleStickyButton() {
+            if (!formSection || !stickyButton) return;
+
+            const formTop = formSection.getBoundingClientRect().top;
+
+            // Hide when the review form reaches the viewport
+            if (formTop <= window.innerHeight * 0.4) {
+                stickyButton.classList.add('hidden');
+            } else {
+                stickyButton.classList.remove('hidden');
+            }
+        }
+
+        window.addEventListener('scroll', toggleStickyButton);
+        window.addEventListener('load', toggleStickyButton);
+    </script>
 </body>
 
 </html>

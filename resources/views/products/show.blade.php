@@ -39,6 +39,11 @@
                 {{-- Content --}}
                 <div class="min-w-0 flex-1">
                     <div class="flex flex-wrap items-center gap-2">
+
+                    </div>
+
+                    <p class="mt-2 text-[10px] font-bold uppercase tracking-[0.18em] text-primary">
+                        {{ $product->brand ?: 'Marque non précisée' }}
                         <span class="rounded-full border border-primary/20 bg-white px-2.5 py-1 text-[10px] font-semibold text-primary">
                             {{ $product->category?->parent?->name ?? 'Beauté' }}
                         </span>
@@ -48,14 +53,11 @@
                             {{ $product->category->name }}
                         </span>
                         @endif
-                    </div>
-
-                    <p class="mt-2 text-[10px] font-bold uppercase tracking-[0.18em] text-primary">
-                        {{ $product->brand ?: 'Marque non précisée' }}
                     </p>
 
                     <h1 class="mt-1 line-clamp-2 text-lg font-bold leading-tight text-brown sm:text-2xl md:text-3xl">
                         {{ $product->name }}
+
                     </h1>
 
                     @php

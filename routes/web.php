@@ -44,9 +44,7 @@ Route::get('/brands-by-category', function (Request $request) {
     return response()->json($brands);
 })->name('brands.by.category');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

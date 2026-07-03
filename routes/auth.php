@@ -61,6 +61,20 @@ Route::middleware('auth')->group(function () {
     Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])
         ->name('reviews.store');
 });
+Route::get('/dashboard', function () {
+    $user = auth()->user();
+
+    $reviews = $user->reviews()
+        ->with('product')
+        ->latest()
+        ->paginate(10);
+
+    $reviewsCount = $user->reviews()->count();
+    $avgRating = $user->reviews()->avg('rating');
+    $productsCount = $user->reviews()->distinct('product_id')->count('product_id');
+
+    return view('dashboard', compact('reviews', 'reviewsCount', 'avgRating', 'productsCount'));
+})->middleware(['auth', 'verified'])->name('dashboard');
 //  GOOGLE AUTH : 
 Route::get('/auth/google', [GoogleController::class, 'redirect'])
     ->name('google.redirect');

@@ -1,11 +1,11 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+        <h2 class="font-display text-3xl font-bold text-brown">
+            Informations du profil
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+        <p class="mt-3 max-w-2xl text-sm leading-7 text-brown-soft">
+            Modifie les informations visibles sur ton compte. Les comptes connectés avec Google gardent leur adresse e-mail verrouillée.
         </p>
     </header>
 
@@ -13,34 +13,64 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-8 space-y-6">
         @csrf
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <label for="name" class="text-sm font-semibold text-brown">Nom</label>
+            <input
+                id="name"
+                name="name"
+                type="text"
+                value="{{ old('name', $user->name) }}"
+                required
+                autofocus
+                autocomplete="name"
+                class="mt-2 block w-full rounded-2xl border border-border bg-cream px-5 py-3 text-sm text-brown placeholder:text-brown-light outline-none transition focus:border-primary focus:ring-0"
+            />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <div class="flex items-center justify-between gap-3">
+                <label for="email" class="text-sm font-semibold text-brown">Adresse e-mail</label>
+
+                @if ($user->google_id)
+                    <span class="rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold text-primary">
+                        Gérée par Google
+                    </span>
+                @endif
+            </div>
+
+            <input
+                id="email"
+                name="email"
+                type="email"
+                value="{{ old('email', $user->email) }}"
+                {{ $user->google_id ? 'disabled' : 'required' }}
+                autocomplete="username"
+                class="mt-2 block w-full rounded-2xl border border-border bg-cream px-5 py-3 text-sm text-brown placeholder:text-brown-light outline-none transition focus:border-primary focus:ring-0 {{ $user->google_id ? 'cursor-not-allowed opacity-60' : '' }}"
+            />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+            @if ($user->google_id)
+                <p class="mt-2 text-sm text-brown-soft">
+                    Cette adresse e-mail est synchronisée avec ton compte Google et ne peut pas être modifiée ici.
+                </p>
+            @elseif ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
+                    <p class="mt-2 text-sm text-brown">
+                        Ton adresse e-mail n'est pas encore vérifiée.
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
+                        <button form="send-verification" class="font-semibold text-primary underline transition hover:text-primary-hover focus:outline-none focus:ring-0">
+                            Renvoyer l'e-mail de vérification
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                        <p class="mt-2 text-sm font-medium text-primary">
+                            Un nouveau lien de vérification a été envoyé.
                         </p>
                     @endif
                 </div>
@@ -48,7 +78,12 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <button
+                type="submit"
+                class="inline-flex items-center rounded-pill bg-primary px-6 py-3 text-sm font-bold text-white shadow-soft transition hover:bg-primary-hover"
+            >
+                Enregistrer
+            </button>
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -56,8 +91,8 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                    class="text-sm font-medium text-primary"
+                >Modifications enregistrées.</p>
             @endif
         </div>
     </form>

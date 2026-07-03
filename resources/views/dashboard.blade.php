@@ -1,5 +1,10 @@
 <x-app-layout>
     <main class="mx-auto max-w-7xl px-6 py-12">
+        @if (session('success'))
+            <div class="mb-6 rounded-2xl border border-primary/20 bg-primary-soft px-5 py-4 text-sm font-medium text-brown shadow-soft">
+                {{ session('success') }}
+            </div>
+        @endif
 
         {{-- Welcome header --}}
         <section class="mb-10 flex flex-col gap-6 rounded-card border border-border bg-white p-8 shadow-soft sm:flex-row sm:items-center sm:justify-between">
@@ -66,30 +71,38 @@
 
             @forelse ($reviews as $review)
 
-            <a href="{{ route('products.show', $review->product->slug) }}"
-                class="mb-4 flex items-center gap-4 rounded-2xl border border-border bg-white p-5 shadow-soft transition hover:-translate-y-1 hover:border-primary/30 hover:shadow-card">
+            <div class="mb-4 flex flex-col gap-4 rounded-2xl border border-border bg-white p-5 shadow-soft transition hover:border-primary/30 hover:shadow-card sm:flex-row sm:items-center">
 
-                <img
-                    src="{{ $review->product->image ? asset('storage/' . $review->product->image) : asset('logo.png') }}"
-                    alt="{{ $review->product->name }}"
-                    class="h-16 w-16 shrink-0 rounded-xl object-cover">
+                <a href="{{ route('products.show', $review->product->slug) }}" class="flex min-w-0 flex-1 items-center gap-4">
+                    <img
+                        src="{{ $review->product->image ? asset('storage/' . $review->product->image) : asset('logo.png') }}"
+                        alt="{{ $review->product->name }}"
+                        class="h-16 w-16 shrink-0 rounded-xl object-cover">
 
-                <div class="min-w-0 flex-1">
-                    <h3 class="truncate text-base font-semibold text-brown">
-                        {{ $review->product->name }}
-                    </h3>
-                    <p class="mt-1 line-clamp-1 text-sm text-brown-soft">
-                        {{ $review->body }}
-                    </p>
-                    <p class="mt-1 text-xs text-brown-light">
-                        {{ $review->created_at->format('d/m/Y') }}
-                    </p>
+                    <div class="min-w-0 flex-1">
+                        <h3 class="truncate text-base font-semibold text-brown">
+                            {{ $review->product->name }}
+                        </h3>
+                        <p class="mt-1 line-clamp-1 text-sm text-brown-soft">
+                            {{ $review->body }}
+                        </p>
+                        <p class="mt-1 text-xs text-brown-light">
+                            {{ $review->created_at->format('d/m/Y') }}
+                        </p>
+                    </div>
+                </a>
+
+                <div class="flex items-center justify-between gap-3 sm:justify-end">
+                    <div class="shrink-0 rounded-xl bg-cream px-3 py-2 text-center">
+                        <p class="text-base font-semibold text-primary">{{ $review->stars }}</p>
+                    </div>
+
+                    <a href="{{ route('reviews.edit', $review) }}"
+                        class="inline-flex items-center rounded-pill border border-border bg-white px-4 py-2 text-sm font-semibold text-brown transition hover:border-primary/30 hover:text-primary">
+                        Modifier
+                    </a>
                 </div>
-
-                <div class="shrink-0 rounded-xl bg-cream px-3 py-2 text-center">
-                    <p class="text-base font-semibold text-primary">{{ $review->stars }}</p>
-                </div>
-            </a>
+            </div>
 
             @empty
             <div class="rounded-[2rem] border border-dashed border-border bg-white px-8 py-16 text-center shadow-soft">

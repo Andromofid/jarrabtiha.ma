@@ -112,82 +112,217 @@
 
         <section class="mt-12 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
 
-            <div>
+            <div class="space-y-6">
 
-                <div class="mb-6">
-                    <h2 class="text-3xl font-bold text-brown">Avis de la communauté</h2>
-                    <p class="mt-2 text-base text-brown-soft">
-                        Des retours utiles et basés sur de vraies expériences.
-                    </p>
-                </div>
+                {{-- Header --}}
+                <div class="rounded-[2rem] border border-border bg-white p-6 shadow-soft">
+                    <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
 
-                @forelse ($product->reviews as $review)
-                <article class="mb-4 rounded-2xl border border-border bg-white p-5 shadow-soft">
-                    <div class="flex flex-wrap items-start justify-between gap-4">
                         <div>
-                            <div class="flex items-center gap-3">
-                                <h3 class="text-lg font-semibold text-brown">
-                                    {{ $review->user?->name ?? 'Membre de la communauté' }}
-
-                                </h3>
-
-                                @if ($review->verified)
-                                <span class="rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold text-primary">
-                                    Vérifié
-                                </span>
-                                @endif
-                            </div>
-
-                            <p class="mt-1 text-sm text-brown-soft flex items-center gap-2">
-                                {{ $review->created_at?->format('d/m/Y') }}
-                            </p>
+                            <span class="inline-flex rounded-full bg-primary-soft px-4 py-2 text-xs font-bold uppercase tracking-wide text-primary">
+                                Avis de la communauté
+                            </span>
                         </div>
 
-                        <div class="rounded-xl bg-cream px-3 py-2 text-right">
-                            <p class="text-base font-semibold text-primary">{{ $review->stars }}</p>
+
+                    </div>
+
+                    {{-- Filters Dropdown --}}
+                    <div x-data="{ open: false }" class="sticky top-24 z-20 mt-6">
+                        <button
+                            type="button"
+                            @click="open = !open"
+                            class="flex w-full items-center justify-between rounded-3xl border border-border bg-white px-5 py-4 text-left shadow-soft transition hover:border-primary/40">
+
+                            <div>
+                                <p class="text-sm font-bold text-brown">Filtrer les avis</p>
+                                <p class="mt-1 text-xs text-brown-soft">
+                                    Note, tri et recommandations
+                                </p>
+                            </div>
+
+                            <svg
+                                class="h-5 w-5 text-brown-soft transition"
+                                :class="{ 'rotate-180': open }"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <form
+                            x-show="open"
+                            x-transition
+                            @click.outside="open = false"
+                            method="GET"
+                            class="mt-3 rounded-3xl border border-border bg-white p-4 shadow-card sm:p-5 ">
+                            {{-- Preserve other query parameters --}}
+                            @foreach (request()->query() as $key => $value)
+                            @if ($key !== 'rating' && $key !== 'sort')
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endif
+                            @endforeach
+
+                            <div class="space-y-5">
+
+                                {{-- Rating --}}
+                                <div>
+                                    <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-brown-soft">
+                                        Note
+                                    </p>
+
+                                    <div class="grid grid-cols-3 gap-2 sm:grid-cols-6">
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="rating" value="" class="peer sr-only" @checked(request('rating')===null)>
+                                            <span class="flex justify-center rounded-pill border border-border bg-cream px-4 py-2.5 text-sm font-medium text-brown-soft transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                                                Toutes
+                                            </span>
+                                        </label>
+
+                                        @for ($i = 5; $i >= 1; $i--)
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="rating" value="{{ $i }}" class="peer sr-only" @checked(request('rating')==$i)>
+                                            <span class="flex justify-center gap-1 rounded-pill border border-border bg-cream px-4 py-2.5 text-sm font-medium text-brown-soft transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                                                {{ $i }} <span>★</span>
+                                            </span>
+                                        </label>
+                                        @endfor
+                                    </div>
+                                </div>
+
+                                {{-- Sort --}}
+                                <div>
+                                    <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-brown-soft">
+                                        Trier
+                                    </p>
+
+                                    <div class="grid grid-cols-2 rounded-pill border border-border bg-cream p-1">
+                                        @php
+                                        $sorts = ['latest' => 'Plus récents', 'oldest' => 'Plus anciens'];
+                                        $activeSort = request('sort', 'latest');
+                                        @endphp
+
+                                        @foreach ($sorts as $value => $label)
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="sort" value="{{ $value }}" class="peer sr-only" @checked($activeSort===$value)>
+                                            <span class="flex justify-center rounded-pill px-4 py-2.5 text-sm font-medium text-brown-soft transition peer-checked:bg-primary peer-checked:text-white">
+                                                {{ $label }}
+                                            </span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                {{-- Recommend --}}
+                                <label class="flex cursor-pointer items-center justify-between rounded-2xl border border-border bg-cream px-4 py-3">
+                                    <span class="text-sm font-semibold text-brown">
+                                        Recommandé uniquement
+                                    </span>
+
+                                    <span class="relative ml-4 inline-flex h-6 w-11 shrink-0 items-center">
+                                        <input type="checkbox" name="recommend" value="1" class="peer sr-only" @checked(request('recommend')==='1' )>
+                                        <span class="absolute inset-0 rounded-full bg-border transition peer-checked:bg-primary"></span>
+                                        <span class="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition peer-checked:translate-x-5"></span>
+                                    </span>
+                                </label>
+
+                                {{-- Actions --}}
+                                <div class="flex items-center gap-3 border-t border-border pt-4">
+                                    @if (request()->hasAny(['rating', 'sort', 'recommend']))
+                                    <a href="{{ url()->current() }}"
+                                        class="flex-1 rounded-pill border border-border px-5 py-2.5 text-center text-sm font-semibold text-brown-soft transition hover:border-primary hover:text-primary">
+                                        Réinitialiser
+                                    </a>
+                                    @endif
+
+                                    <button class="flex-1 rounded-pill bg-primary px-6 py-2.5 text-sm font-bold text-white shadow-soft transition hover:bg-primary-hover">
+                                        Appliquer
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                {{-- Reviews --}}
+                @forelse ($reviews as $review)
+                <article class="group rounded-[1.75rem] border border-border bg-white p-5 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-card sm:p-6">
+
+                    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+
+                        <div class="flex gap-4">
+                            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-soft text-lg font-black text-primary">
+                                {{ mb_substr($review->user?->name ?? 'M', 0, 1) }}
+                            </div>
+
+                            <div>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <h3 class="text-lg font-bold text-brown">
+                                        {{ $review->user?->name ?? 'Membre de la communauté' }}
+                                    </h3>
+
+                                    @if ($review->verified)
+                                    <span class="rounded-full bg-primary-soft px-3 py-1 text-xs font-bold text-primary">
+                                        Vérifié
+                                    </span>
+                                    @endif
+
+                                    @if ($review->would_recommend)
+                                    <span class="rounded-full bg-green-50 px-3 py-1 text-xs font-bold text-green-700">
+                                        Recommandé
+                                    </span>
+                                    @endif
+                                    <div class="text-lg font-black text-primary bg-cream px-3 py-1 rounded-full">
+                                        {{ str_repeat('★', (int) $review->rating) }}
+                                    </div>
+                                </div>
+
+                                <p class="mt-1 text-sm text-brown-soft">
+                                    {{ $review->created_at?->format('d/m/Y') }}
+                                </p>
+                            </div>
                         </div>
                     </div>
 
-                    <p class="mt-4 text-[15px] leading-7 text-brown-soft">
+
+                    <p class="mt-3 text-[15px] leading-7 text-brown-soft">
                         {{ $review->body ?: 'Aucun détail supplémentaire n’a été partagé pour cet avis.' }}
                     </p>
 
-                    <div class="mt-4 flex flex-wrap gap-2 text-xs items-center justify-between">
-                        <div>
-                            <span class="rounded-full border border-border bg-cream px-3 py-2 text-brown-soft ">
-                                Durée du test : {{ $review->result_duration_label }}
-                            </span>
-                            @if ($review->would_recommend )
-                            <span class="rounded-full border border-border bg-cream px-3 py-2 ml-2 text-brown-soft">
-                                Recommandé
-                            </span>
-                            @endif
-                        </div>
-                        <!-- likes -->
-                        <!-- <form action="">
-                            <button type="button" class="flex items-center gap-2 rounded-full border border-border bg-cream px-3 py-2 text-brown-soft hover:bg-primary-soft hover:text-primary transition">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.62436 4.4241C3.96537 5.18243 2.75 6.98614 2.75 9.13701C2.75 11.3344 3.64922 13.0281 4.93829 14.4797C6.00072 15.676 7.28684 16.6675 8.54113 17.6345C8.83904 17.8642 9.13515 18.0925 9.42605 18.3218C9.95208 18.7365 10.4213 19.1004 10.8736 19.3647C11.3261 19.6292 11.6904 19.7499 12 19.7499C12.3096 19.7499 12.6739 19.6292 13.1264 19.3647C13.5787 19.1004 14.0479 18.7365 14.574 18.3218C14.8649 18.0925 15.161 17.8642 15.4589 17.6345C16.7132 16.6675 17.9993 15.676 19.0617 14.4797C20.3508 13.0281 21.25 11.3344 21.25 9.13701C21.25 6.98614 20.0346 5.18243 18.3756 4.4241C16.7639 3.68739 14.5983 3.88249 12.5404 6.02065C12.399 6.16754 12.2039 6.25054 12 6.25054C11.7961 6.25054 11.601 6.16754 11.4596 6.02065C9.40166 3.88249 7.23607 3.68739 5.62436 4.4241ZM12 4.45873C9.68795 2.39015 7.09896 2.10078 5.00076 3.05987C2.78471 4.07284 1.25 6.42494 1.25 9.13701C1.25 11.8025 2.3605 13.836 3.81672 15.4757C4.98287 16.7888 6.41022 17.8879 7.67083 18.8585C7.95659 19.0785 8.23378 19.292 8.49742 19.4998C9.00965 19.9036 9.55954 20.3342 10.1168 20.6598C10.6739 20.9853 11.3096 21.2499 12 21.2499C12.6904 21.2499 13.3261 20.9853 13.8832 20.6598C14.4405 20.3342 14.9903 19.9036 15.5026 19.4998C15.7662 19.292 16.0434 19.0785 16.3292 18.8585C17.5898 17.8879 19.0171 16.7888 20.1833 15.4757C21.6395 13.836 22.75 11.8025 22.75 9.13701C22.75 6.42494 21.2153 4.07284 18.9992 3.05987C16.901 2.10078 14.3121 2.39015 12 4.45873Z" fill="#3B2A27" />
-                                </svg>
-
-                                {{ $review->likes_count }}
-                            </button>
-                        </form> -->
-
+                    <div class="mt-5 flex flex-wrap items-center gap-2">
+                        <span class="rounded-full border border-border bg-cream px-4 py-2 text-xs font-semibold text-brown-soft">
+                            Durée du test : {{ $review->result_duration_label }}
+                        </span>
                     </div>
-
-
                 </article>
                 @empty
-                <div class="rounded-2xl border border-dashed border-border bg-white px-6 py-12 text-center shadow-soft">
-                    <h3 class="text-2xl font-bold text-brown">Pas encore d'avis</h3>
+                <div class="rounded-[2rem] border border-dashed border-border bg-white px-6 py-14 text-center shadow-soft">
+                    <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary-soft text-3xl">
+                        💬
+                    </div>
+
+                    <h3 class="mt-5 text-2xl font-bold text-brown">
+                        Pas encore d’avis
+                    </h3>
+
                     <p class="mx-auto mt-3 max-w-xl text-brown-soft">
-                        Ce produit est encore en attente de ses premiers retours.
+                        Ce produit attend encore ses premiers retours. Soyez la première à partager votre expérience.
                     </p>
                 </div>
                 @endforelse
+
+                {{-- Pagination --}}
+                @if ($reviews->hasPages())
+                <div class="pt-2">
+                    {{ $reviews->links() }}
+                </div>
+                @endif
+
                 {{-- Write Review --}}
                 <x-review-form :product="$product" />
+
             </div>
 
             <aside class="space-y-6">

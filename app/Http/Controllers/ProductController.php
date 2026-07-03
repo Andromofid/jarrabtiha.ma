@@ -55,18 +55,54 @@ class ProductController extends Controller
         ]);
     }
 
-    public function show(Product $product): View
+    public function show(Request $request, Product $product): View
     {
         abort_unless($product->is_approved, 404);
 
-        $product->load([
-            'category.parent',
-            'reviews' => fn ($query) => $query
-                ->with('user')
-                ->orderByDesc('verified')
-                ->orderByDesc('likes_count')
-                ->latest(),
-        ]);
+        $product->load('category.parent');
+
+        $reviews = $product->reviews()
+            ->with('user')
+            ->when(
+                $request->rating,
+                fn($query) =>
+                $query->where('rating', $request->rating)
+            )
+            ->when(
+                $request->duration,
+                fn($query) =>
+                $query->where('result_duration', $request->duration)
+            )
+            ->when(
+                $request->recommend === '1',
+                fn($query) =>
+                $query->where('would_recommend', true)
+            )
+            ->when(
+                $request->verified === '1',
+                fn($query) =>
+                $query->where('verified', true)
+            )
+            ->when(
+                $request->sort === 'oldest',
+                fn($query) =>
+                $query->oldest()
+            )
+            ->when(
+                $request->sort === 'top',
+                fn($query) =>
+                $query->orderByDesc('rating')
+            )
+            ->when(
+                ! in_array($request->sort, ['oldest', 'top']),
+                fn($query) =>
+                $query
+                    ->orderByDesc('verified')
+                    ->orderByDesc('likes_count')
+                    ->latest()
+            )
+            ->paginate(6)
+            ->withQueryString();
 
         $relatedProducts = Product::query()
             ->approved()
@@ -74,8 +110,8 @@ class ProductController extends Controller
             ->where('id', '!=', $product->id)
             ->when(
                 $product->category_id,
-                fn ($query) => $query->where('category_id', $product->category_id),
-                fn ($query) => $query->where('brand', $product->brand)
+                fn($query) => $query->where('category_id', $product->category_id),
+                fn($query) => $query->where('brand', $product->brand)
             )
             ->latest()
             ->limit(3)
@@ -83,6 +119,7 @@ class ProductController extends Controller
 
         return view('products.show', [
             'product' => $product,
+            'reviews' => $reviews,
             'relatedProducts' => $relatedProducts,
         ]);
     }

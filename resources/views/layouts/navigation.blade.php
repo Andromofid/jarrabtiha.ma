@@ -33,6 +33,7 @@
                 Marques
             </a>
 
+
         </div>
 
         <div class="hidden items-center gap-3 lg:flex">
@@ -106,7 +107,7 @@
 
             <a
                 href="{{ route('login') }}"
-                class="block">
+                class="rounded-pill px-5 py-3 font-medium text-brown hover:bg-primary-soft">
 
                 Connexion
 
@@ -114,11 +115,32 @@
 
             <a
                 href="{{ route('register') }}"
-                class="block rounded-pill bg-primary py-3 text-center font-semibold text-white">
+                class="rounded-pill bg-primary px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-primary-hover">
 
                 Rejoindre
 
             </a>
+
+            @else
+            <div class="flex items-center justify-between gap-3">
+                <a
+                    href="{{ route('dashboard') }}"
+                    class="block">
+    
+                    Dashboard
+    
+                </a>
+                <!-- logout -->
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button
+                        type="submit"
+                        class="rounded-pill bg-danger px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-danger-hover">
+                        Déconnexion
+                    </button>
+                </form>
+
+            </div>
 
             @endguest
 

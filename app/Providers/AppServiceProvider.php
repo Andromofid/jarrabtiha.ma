@@ -8,6 +8,7 @@ use App\Models\Review;
 use App\Models\ReviewLike;
 use App\Observers\ReviewObserver;
 use App\Observers\ReviewLikeObserver;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
         Review::observe(ReviewObserver::class);
         ReviewLike::observe(ReviewLikeObserver::class);
     }

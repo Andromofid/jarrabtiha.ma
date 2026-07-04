@@ -104,31 +104,32 @@
             <hr>
 
             @guest
+            <div class="flex items-center justify-between gap-3">
+                <a
+                    href="{{ route('login') }}"
+                    class="rounded-pill px-5 py-3 font-medium text-brown hover:bg-primary-soft">
 
-            <a
-                href="{{ route('login') }}"
-                class="rounded-pill px-5 py-3 font-medium text-brown hover:bg-primary-soft">
+                    Connexion
 
-                Connexion
+                </a>
 
-            </a>
+                <a
+                    href="{{ route('register') }}"
+                    class="rounded-pill bg-primary px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-primary-hover">
 
-            <a
-                href="{{ route('register') }}"
-                class="rounded-pill bg-primary px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-primary-hover">
+                    Rejoindre
 
-                Rejoindre
-
-            </a>
+                </a>
+            </div>
 
             @else
             <div class="flex items-center justify-between gap-3">
                 <a
                     href="{{ route('dashboard') }}"
                     class="block">
-    
+
                     Dashboard
-    
+
                 </a>
                 <!-- logout -->
                 <form action="{{ route('logout') }}" method="POST" class="inline">

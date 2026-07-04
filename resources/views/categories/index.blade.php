@@ -47,14 +47,6 @@
                                     {{ $parentCategory->children_count }} sous-cat&eacute;gorie(s) &agrave; parcourir
                                 </p>
                             </div>
-
-                            @if ($parentCategory->children->isNotEmpty())
-                                <a
-                                    href="{{ route('products.index', ['category' => $parentCategory->children->first()->slug]) }}"
-                                    class="inline-flex rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-hover">
-                                    Voir les produits
-                                </a>
-                            @endif
                         </div>
                     </div>
 

@@ -23,13 +23,13 @@
                 Produits
             </a>
 
-            <a href="#"
-                class="font-medium text-brown-soft transition hover:text-primary">
-                Catégories
+            <a href="{{ route('categories.index') }}"
+                class="font-medium {{ request()->routeIs('categories.*') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
+                Cat&eacute;gories
             </a>
 
-            <a href="#"
-                class="font-medium text-brown-soft transition hover:text-primary">
+            <a href="{{ route('brands.index') }}"
+                class="font-medium {{ request()->routeIs('brands.*') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
                 Marques
             </a>
 
@@ -71,7 +71,7 @@
                 <button
                     type="submit"
                     class="rounded-pill bg-danger px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-danger-hover">
-                    Déconnexion
+                    D&eacute;connexion
                 </button>
             </form>
 
@@ -83,7 +83,7 @@
             @click="mobile=!mobile"
             class="lg:hidden">
 
-            ☰
+            &#9776;
 
         </button>
 
@@ -98,8 +98,8 @@
 
             <a href="{{ url('/') }}" class="block">Accueil</a>
             <a href="{{ route('products.index') }}" class="block">Produits</a>
-            <a class="block">Catégories</a>
-            <a class="block">Marques</a>
+            <a href="{{ route('categories.index') }}" class="block">Cat&eacute;gories</a>
+            <a href="{{ route('brands.index') }}" class="block">Marques</a>
 
             <hr>
 
@@ -136,7 +136,7 @@
                     <button
                         type="submit"
                         class="rounded-pill bg-danger px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-danger-hover">
-                        Déconnexion
+                        D&eacute;connexion
                     </button>
                 </form>
 

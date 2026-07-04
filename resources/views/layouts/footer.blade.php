@@ -12,7 +12,7 @@
 
                 <p class="mt-5 text-sm leading-7 text-brown-soft">
 
-                    Découvrez les vrais avis des femmes marocaines avant d'acheter vos produits beauté.
+                    D&eacute;couvrez les vrais avis des femmes marocaines avant d'acheter vos produits beaut&eacute;.
 
                 </p>
 
@@ -22,15 +22,15 @@
 
                 <h4 class="mb-4 font-semibold text-brown">
 
-                    Découvrir
+                    D&eacute;couvrir
 
                 </h4>
 
                 <ul class="space-y-3 text-brown-soft">
 
-                    <li><a href="#">Produits</a></li>
-                    <li><a href="#">Catégories</a></li>
-                    <li><a href="#">Marques</a></li>
+                    <li><a href="{{ route('products.index') }}">Produits</a></li>
+                    <li><a href="{{ route('categories.index') }}">Cat&eacute;gories</a></li>
+                    <li><a href="{{ route('brands.index') }}">Marques</a></li>
 
                 </ul>
 
@@ -40,7 +40,7 @@
 
                 <h4 class="mb-4 font-semibold text-brown">
 
-                    Communauté
+                    Communaut&eacute;
 
                 </h4>
 
@@ -48,7 +48,7 @@
 
                     <li><a href="#">Ajouter un avis</a></li>
                     <li><a href="#">Connexion</a></li>
-                    <li><a href="#">Créer un compte</a></li>
+                    <li><a href="#">Cr&eacute;er un compte</a></li>
 
                 </ul>
 
@@ -84,13 +84,13 @@
 
             <p>
 
-                © {{ date('Y') }} Jarrabtiha.ma
+                &copy; {{ date('Y') }} Jarrabtiha.ma
 
             </p>
 
             <div class="flex gap-6">
 
-                <a href="#">Confidentialité</a>
+                <a href="#">Confidentialit&eacute;</a>
 
                 <a href="#">Conditions</a>
 

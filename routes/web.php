@@ -25,6 +25,33 @@ Route::get('/', function () {
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 
+Route::get('/categories', function () {
+    $parentCategories = Category::parents()
+        ->withCount('children')
+        ->with([
+            'children' => fn($query) => $query
+                ->withCount([
+                    'products as approved_products_count' => fn($productQuery) => $productQuery->approved(),
+                ]),
+        ])
+        ->get();
+
+    return view('categories.index', compact('parentCategories'));
+})->name('categories.index');
+
+Route::get('/brands', function () {
+    $brands = Product::query()
+        ->approved()
+        ->whereNotNull('brand')
+        ->where('brand', '!=', '')
+        ->selectRaw('brand, COUNT(*) as products_count, AVG(COALESCE(rating_avg, 0)) as average_rating')
+        ->groupBy('brand')
+        ->orderBy('brand')
+        ->get();
+
+    return view('brands.index', compact('brands'));
+})->name('brands.index');
+
 Route::get('/brands-by-category', function (Request $request) {
     $categorySlug = $request->query('category');
 

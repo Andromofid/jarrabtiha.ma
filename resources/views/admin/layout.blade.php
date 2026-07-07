@@ -28,6 +28,13 @@
                         <p class="mt-3 max-w-2xl text-sm text-brown-soft sm:text-base">
                             Update products and categories with the same visual system used across the live site.
                         </p>
+                        <!-- logout -->
+                       <form action="{{ route('admin.logout') }}" method="POST" class="inline-block">
+                            @csrf
+                            <button type="submit" class="bg-primary text-white hover:bg-primary/90 px-5 py-3 text-sm font-semibold transition">
+                                Logout
+                            </button>
+                        </form>
                     </div>
 
                     <nav class="flex flex-wrap gap-3">

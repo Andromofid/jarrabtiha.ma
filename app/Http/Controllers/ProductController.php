@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -32,7 +34,7 @@ class ProductController extends Controller
             ->paginate(12)
             ->withQueryString();
 
-        $categories = Category::childrens()->get();
+        $categories = Category::childrens()->with('parent')->get();
         $parentCategories = Category::parents()
             ->with('children')
             ->withCount('children')
@@ -122,5 +124,39 @@ class ProductController extends Controller
             'reviews' => $reviews,
             'relatedProducts' => $relatedProducts,
         ]);
+    }
+
+    public function storeSuggestion(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'brand' => ['nullable', 'string', 'max:255'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'where_to_buy' => ['nullable', 'url', 'max:255'],
+            'description' => ['nullable', 'string', 'max:2000'],
+        ]);
+
+        $validated['slug'] = $this->generateUniqueSlug($validated['name']);
+        $validated['is_approved'] = false;
+
+        Product::create($validated);
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Produit ajouté avec succès. Il est maintenant en attente de validation.');
+    }
+
+    protected function generateUniqueSlug(string $name): string
+    {
+        $baseSlug = Str::slug($name);
+        $slug = $baseSlug !== '' ? $baseSlug : 'produit';
+        $suffix = 1;
+
+        while (Product::where('slug', $slug)->exists()) {
+            $slug = ($baseSlug !== '' ? $baseSlug : 'produit') . '-' . $suffix;
+            $suffix++;
+        }
+
+        return $slug;
     }
 }

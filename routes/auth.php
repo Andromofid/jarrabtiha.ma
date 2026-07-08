@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])
         ->name('reviews.store');
+
+    Route::post('/products/suggestions', [ProductController::class, 'storeSuggestion'])
+        ->name('products.suggestions.store');
 
     Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])
         ->name('reviews.edit');

@@ -13,6 +13,7 @@
 
 <body class="min-h-screen bg-cream text-brown font-sans antialiased">
     @include('layouts.navigation')
+    @include('components.flash-messages')
     <main class="mx-auto max-w-7xl px-6 py-16">
 
         <section>
@@ -87,6 +88,10 @@
                 {{ $products->links() }}
             </div>
             @endif
+        </section>
+
+        <section class="mt-16">
+            <x-product-request-form :categories="$categories" />
         </section>
 
         <section class="mt-24">

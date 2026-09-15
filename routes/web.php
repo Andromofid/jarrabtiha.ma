@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Market\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\Product;
@@ -19,12 +19,13 @@ Route::get('/', function () {
     $parentCategories = Category::parents()
         ->with('children')
         ->get();
-    return view('welcome', compact('categories', 'marques', 'parentCategories'));
+    return view('market.welcome', compact('categories', 'marques', 'parentCategories'));
 });
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
-
+Route::post('/products/suggestions', [ProductController::class, 'storeSuggestion'])
+    ->name('products.suggestions.store');
 Route::get('/categories', function () {
     $parentCategories = Category::parents()
         ->withCount('children')
@@ -36,7 +37,7 @@ Route::get('/categories', function () {
         ])
         ->get();
 
-    return view('categories.index', compact('parentCategories'));
+    return view('market.categories.index', compact('parentCategories'));
 })->name('categories.index');
 
 Route::get('/brands', function () {
@@ -49,7 +50,7 @@ Route::get('/brands', function () {
         ->orderBy('brand')
         ->get();
 
-    return view('brands.index', compact('brands'));
+    return view('market.brands.index', compact('brands'));
 })->name('brands.index');
 
 Route::get('/brands-by-category', function (Request $request) {

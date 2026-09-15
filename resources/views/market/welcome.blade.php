@@ -15,16 +15,20 @@
     @include('layouts.navigation')
     <header class="relative overflow-hidden">
 
-        <!-- Background -->
-        <div class="absolute inset-0 bg-gradient-to-b from-primary-soft/40 via-cream to-cream"></div>
-        <div class="absolute -top-40 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
+        <!-- Background image -->
+        <div
+            class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('{{ asset('images/hero-bg.webp') }}')">
+        </div>
+
+
 
         <div class="relative mx-auto flex min-h-[75vh] max-w-6xl items-center justify-center px-6 py-10 sm:py-8">
 
             <div class="w-full max-w-4xl text-center">
 
                 <!-- Badge -->
-                <div class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white px-5 py-2 text-sm font-semibold text-primary shadow-soft">
+                <div class="hidden md:inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white px-5 py-2 text-sm font-semibold text-primary shadow-soft">
                     🇲🇦 Les vrais avis beauté des femmes marocaines
                 </div>
 
@@ -81,11 +85,9 @@
                         @endforeach
                     </select>
 
-
-
                     <button
                         type="submit"
-                        class="h-12 rounded-pill bg-primary px-8 text-sm font-bold text-white transition hover:bg-primary-hover">
+                        class="group relative overflow-hidden rounded-pill bg-gradient-to-r from-primary to-[#B8845B] px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-card hover:scale-[1.03] hover:from-[#B8845B] hover:to-primary">
                         Rechercher
                     </button>
                 </form>
@@ -93,23 +95,22 @@
                 <!-- Stats -->
                 <div class="mt-10 flex flex-wrap justify-center gap-10">
 
-                    <div>
-                        <p class="font-display text-3xl font-bold text-primary">
+                    <div class="text-center bg-primary/90 rounded-card p-5">
+                        <p class="font-display text-3xl font-bold text-white ">
                             150+
                         </p>
-                        <p class="mt-1 text-sm text-brown-soft">
+                        <p class="mt-1 text-sm text-white">
                             Produits
                         </p>
                     </div>
-                    <div>
-                        <p class="font-display text-3xl font-bold text-primary">
+                    <div class="text-center bg-primary/90 rounded-card p-5">
+                        <p class="font-display text-3xl font-bold text-white">
                             30+
                         </p>
-                        <p class="mt-1 text-sm text-brown-soft">
+                        <p class="mt-1 text-sm text-white">
                             Catégories
                         </p>
                     </div>
-
 
                 </div>
 
@@ -237,17 +238,7 @@
             </div>
 
         </section>
-
-        <section class="mt-20 rounded-[2rem] bg-brown p-8 text-center text-white lg:p-12">
-            <h2 class="font-display text-4xl font-bold">جربتي شي منتج؟</h2>
-            <p class="mx-auto mt-4 max-w-2xl text-white/70">
-                Partage ton avis et aide la communauté à choisir les bons produits.
-            </p>
-
-            <a href="" class="mt-8 inline-flex rounded-pill bg-primary px-8 py-4 text-sm font-bold text-white transition hover:bg-primary-hover">
-                Ajouter mon premier avis
-            </a>
-        </section>
+ 
     </main>
 
     @include('layouts.footer')

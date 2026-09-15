@@ -49,11 +49,11 @@
             </a>
 
             <a
+
                 href="{{ route('register') }}"
-                class="rounded-pill bg-primary px-6 py-3 font-semibold text-white shadow-soft transition hover:bg-primary-hover">
+                class="group relative overflow-hidden rounded-pill bg-gradient-to-r from-primary to-[#B8845B] px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-card hover:scale-[1.03] hover:from-[#B8845B] hover:to-primary">
 
-                Rejoindre
-
+                <span class="relative z-10">Rejoindre</span>
             </a>
 
             @else

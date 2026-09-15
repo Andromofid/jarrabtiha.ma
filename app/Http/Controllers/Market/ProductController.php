@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Market;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
@@ -46,7 +47,7 @@ class ProductController extends Controller
             ->orderBy('brand')
             ->pluck('brand');
 
-        return view('products.index', [
+        return view('market.products.index', [
             'brands' => $brands,
             'categories' => $categories,
             'parentCategories' => $parentCategories,
@@ -119,7 +120,7 @@ class ProductController extends Controller
             ->limit(3)
             ->get();
 
-        return view('products.show', [
+        return view('market.products.show', [
             'product' => $product,
             'reviews' => $reviews,
             'relatedProducts' => $relatedProducts,

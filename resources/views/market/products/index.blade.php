@@ -15,7 +15,6 @@
     @include('layouts.navigation')
     @include('components.flash-messages')
     <main class="mx-auto max-w-7xl px-6 py-16">
-
         <section>
             <div class="mb-12 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>

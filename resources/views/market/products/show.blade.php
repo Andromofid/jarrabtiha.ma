@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $product->name }} - Jarrabtiha</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body class="min-h-screen bg-cream text-brown font-sans antialiased">
-    @include('layouts.navigation')
-    @include('components.flash-messages')
+<x-app-layout-market>
     <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
         <div class="mb-6">
             <a
@@ -380,7 +365,6 @@
         </section>
     </main>
 
-    @include('layouts.footer')
     <script>
         const formSection = document.getElementById('review-form');
         const stickyButton = document.getElementById('sticky-review-button');
@@ -410,6 +394,4 @@
         window.addEventListener('scroll', toggleStickyButton);
         window.addEventListener('load', toggleStickyButton);
     </script>
-</body>
-
-</html>
+</x-app-layout-market>

@@ -15,7 +15,7 @@
 
 </head>
 
-<body class="min-h-screen bg-cream text-brown font-sans antialiased">
+<body class="min-h-screen bg-cream text-ink font-sans antialiased">
     <div class="relative isolate overflow-hidden">
         <div class="absolute inset-x-0 top-0 -z-10 h-[26rem] bg-[radial-gradient(circle_at_top,_rgba(201,149,108,0.18),_transparent_55%)]"></div>
 
@@ -24,8 +24,8 @@
                 <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                     <div>
                         <p class="text-sm font-semibold uppercase tracking-[0.28em] text-primary">Admin workspace</p>
-                        <h1 class="mt-3 font-display text-4xl font-bold text-brown sm:text-5xl">Catalog management</h1>
-                        <p class="mt-3 max-w-2xl text-sm text-brown-soft sm:text-base">
+                        <h1 class="mt-3 font-display text-4xl font-bold text-ink sm:text-5xl">Catalog management</h1>
+                        <p class="mt-3 max-w-2xl text-sm text-ink-soft sm:text-base">
                             Update products and categories with the same visual system used across the live site.
                         </p>
                         <!-- logout -->
@@ -40,17 +40,17 @@
                     <nav class="flex flex-wrap gap-3">
                         <a
                             href="{{ route('admin.products.index') }}"
-                            class="{{ request()->routeIs('admin.products.*') ? 'bg-primary text-white shadow-soft' : 'border border-border bg-white text-brown hover:border-primary/30 hover:text-primary' }} rounded-pill px-5 py-3 text-sm font-semibold transition">
+                            class="{{ request()->routeIs('admin.products.*') ? 'bg-primary text-white shadow-soft' : 'border border-border bg-white text-ink hover:border-primary/30 hover:text-primary' }} rounded-pill px-5 py-3 text-sm font-semibold transition">
                             Products
                         </a>
                         <a
                             href="{{ route('admin.categories.index') }}"
-                            class="{{ request()->routeIs('admin.categories.*') ? 'bg-primary text-white shadow-soft' : 'border border-border bg-white text-brown hover:border-primary/30 hover:text-primary' }} rounded-pill px-5 py-3 text-sm font-semibold transition">
+                            class="{{ request()->routeIs('admin.categories.*') ? 'bg-primary text-white shadow-soft' : 'border border-border bg-white text-ink hover:border-primary/30 hover:text-primary' }} rounded-pill px-5 py-3 text-sm font-semibold transition">
                             Categories
                         </a>
                         <a
                             href="{{ route('admin.users.index') }}"
-                            class="{{ request()->routeIs('admin.users.*') ? 'bg-primary text-white shadow-soft' : 'border border-border bg-white text-brown hover:border-primary/30 hover:text-primary' }} rounded-pill px-5 py-3 text-sm font-semibold transition">
+                            class="{{ request()->routeIs('admin.users.*') ? 'bg-primary text-white shadow-soft' : 'border border-border bg-white text-ink hover:border-primary/30 hover:text-primary' }} rounded-pill px-5 py-3 text-sm font-semibold transition">
                             Users
                         </a>
                     </nav>
@@ -58,15 +58,15 @@
             </section>
 
             @if (session('success'))
-                <div class="mb-6 rounded-2xl border border-success/30 bg-success-soft px-5 py-4 text-sm font-medium text-brown shadow-soft">
+                <div class="mb-6 rounded-2xl border border-success/30 bg-success-soft px-5 py-4 text-sm font-medium text-ink shadow-soft">
                     {{ session('success') }}
                 </div>
             @endif
 
             @if ($errors->any())
                 <div class="mb-6 rounded-2xl border border-danger/30 bg-danger-soft px-5 py-4 shadow-soft">
-                    <p class="text-sm font-semibold text-brown">Please fix the following errors:</p>
-                    <ul class="mt-3 space-y-1 text-sm text-brown-soft">
+                    <p class="text-sm font-semibold text-ink">Please fix the following errors:</p>
+                    <ul class="mt-3 space-y-1 text-sm text-ink-soft">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach

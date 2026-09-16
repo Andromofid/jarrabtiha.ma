@@ -11,7 +11,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen bg-cream text-brown font-sans antialiased">
+<body class="min-h-screen bg-cream text-ink font-sans antialiased">
     @include('market.layouts.navigation')
     @include('components.flash-messages')
 

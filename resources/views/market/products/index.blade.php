@@ -3,12 +3,12 @@
         <section>
             <div class="mb-12 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <h2 class="font-display text-4xl font-bold text-brown">Produits à découvrir</h2>
-                    <p class="mt-4 max-w-2xl text-lg text-brown-soft">
+                    <h2 class="font-display text-4xl font-bold text-ink">Produits à découvrir</h2>
+                    <p class="mt-4 max-w-2xl text-lg text-ink-soft">
                         Une sélection claire, pensée pour comparer rapidement avant de passer à l'achat.
                     </p>
                 </div>
-                <div class="mt-10 flex flex-wrap gap-4 text-sm text-brown-soft">
+                <div class="mt-10 flex flex-wrap gap-4 text-sm text-ink-soft">
                     <span class="rounded-full border border-border bg-white px-4 py-2 shadow-soft">
                         {{ $products->total() }} produits trouvés
                     </span>
@@ -17,8 +17,8 @@
 
             @if ($products->isEmpty())
             <div class="rounded-[2rem] border border-dashed border-border bg-white px-8 py-16 text-center shadow-soft">
-                <h3 class="font-display text-3xl font-bold text-brown">Aucun produit trouvé</h3>
-                <p class="mx-auto mt-4 max-w-xl text-brown-soft">
+                <h3 class="font-display text-3xl font-bold text-ink">Aucun produit trouvé</h3>
+                <p class="mx-auto mt-4 max-w-xl text-ink-soft">
                     Essaie une autre recherche ou enlève un filtre pour voir plus de résultats.
                 </p>
             </div>
@@ -45,7 +45,7 @@
                             {{ $product->brand ?: 'Marque non précisée' }}
                         </p>
 
-                        <h3 class="mt-1 line-clamp-2 min-h-[40px] text-sm font-semibold leading-5 text-brown md:text-base">
+                        <h3 class="mt-1 line-clamp-2 min-h-[40px] text-sm font-semibold leading-5 text-ink md:text-base">
                             {{ $product->name }}
                         </h3>
 
@@ -54,7 +54,7 @@
                                 <p class="font-display text-base font-bold leading-none text-primary">
                                     {{ number_format($product->rating_avg ?? 0, 1) }}
                                 </p>
-                                <p class="mt-1 text-[10px] leading-none text-brown-soft">
+                                <p class="mt-1 text-[10px] leading-none text-ink-soft">
                                     {{ $product->rating_count }} avis
                                 </p>
                             </div>
@@ -80,8 +80,8 @@
 
         <section class="mt-24">
             <div class="mb-12 text-start">
-                <h2 class="font-display text-4xl font-bold text-brown">Explorer par catégorie</h2>
-                <p class="mt-4 max-w-2xl text-lg text-brown-soft">
+                <h2 class="font-display text-4xl font-bold text-ink">Explorer par catégorie</h2>
+                <p class="mt-4 max-w-2xl text-lg text-ink-soft">
                     Pars d'abord de la catégorie qui t'intéresse pour gagner du temps.
                 </p>
             </div>
@@ -92,10 +92,10 @@
                     href="{{ route('products.index', ['category' => $category->children->first()?->slug]) }}"
                     class="group relative overflow-hidden rounded-card border border-border bg-white p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-card">
                     <div class="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-primary/5 transition-all duration-300 group-hover:scale-125"></div>
-                    <h3 class="pr-12 text-2xl font-semibold text-brown transition-colors group-hover:text-primary">
+                    <h3 class="pr-12 text-2xl font-semibold text-ink transition-colors group-hover:text-primary">
                         {{ $category->name }}
                     </h3>
-                    <p class="mt-3 text-sm text-brown-soft">
+                    <p class="mt-3 text-sm text-ink-soft">
                         {{ $category->children_count }} sous-catégorie(s) à parcourir
                     </p>
                 </a>

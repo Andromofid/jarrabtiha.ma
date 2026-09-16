@@ -1,7 +1,7 @@
 <x-app-layout>
     <main class="mx-auto max-w-7xl px-6 py-12">
         @if (session('success'))
-            <div class="mb-6 rounded-2xl border border-primary/20 bg-primary-soft px-5 py-4 text-sm font-medium text-brown shadow-soft">
+            <div class="mb-6 rounded-2xl border border-primary/20 bg-primary-soft px-5 py-4 text-sm font-medium text-ink shadow-soft">
                 {{ session('success') }}
             </div>
         @endif
@@ -13,8 +13,8 @@
                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                 </div>
                 <div>
-                    <p class="text-sm text-brown-soft">Bienvenue,</p>
-                    <h1 class="font-display text-3xl font-bold text-brown">
+                    <p class="text-sm text-ink-soft">Bienvenue,</p>
+                    <h1 class="font-display text-3xl font-bold text-ink">
                         {{ auth()->user()->name }}
                     </h1>
                 </div>
@@ -28,7 +28,7 @@
                 </a>
 
                 <a href="{{ route('profile.edit') }}"
-                    class="rounded-pill border border-border bg-white px-6 py-3 text-sm font-semibold text-brown transition hover:border-primary/30 hover:text-primary">
+                    class="rounded-pill border border-border bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:border-primary/30 hover:text-primary">
                     Mon profil
                 </a>
             </div>
@@ -37,24 +37,24 @@
         {{-- Stats --}}
         <section class="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div class="rounded-2xl border border-border bg-white p-6 shadow-soft">
-                <p class="text-sm text-brown-soft">Avis publiés</p>
+                <p class="text-sm text-ink-soft">Avis publiés</p>
                 <p class="mt-2 font-display text-4xl font-bold text-primary">
                     {{ $reviewsCount }}
                 </p>
             </div>
 
             <div class="rounded-2xl border border-border bg-white p-6 shadow-soft">
-                <p class="text-sm text-brown-soft">Note moyenne donnée</p>
+                <p class="text-sm text-ink-soft">Note moyenne donnée</p>
                 <div class="mt-2 flex items-baseline gap-2">
                     <p class="font-display text-4xl font-bold text-primary">
                         {{ number_format($avgRating ?? 0, 1) }}
                     </p>
-                    <span class="text-brown-soft">/ 5</span>
+                    <span class="text-ink-soft">/ 5</span>
                 </div>
             </div>
 
             <div class="rounded-2xl border border-border bg-white p-6 shadow-soft">
-                <p class="text-sm text-brown-soft">Produits testés</p>
+                <p class="text-sm text-ink-soft">Produits testés</p>
                 <p class="mt-2 font-display text-4xl font-bold text-primary">
                     {{ $productsCount }}
                 </p>
@@ -64,7 +64,7 @@
         {{-- Recent reviews --}}
         <section>
             <div class="mb-6 flex items-center justify-between">
-                <h2 class="font-display text-3xl font-bold text-brown">
+                <h2 class="font-display text-3xl font-bold text-ink">
                     Mes derniers avis
                 </h2>
             </div>
@@ -80,13 +80,13 @@
                         class="h-16 w-16 shrink-0 rounded-xl object-cover">
 
                     <div class="min-w-0 flex-1">
-                        <h3 class="truncate text-base font-semibold text-brown">
+                        <h3 class="truncate text-base font-semibold text-ink">
                             {{ $review->product->name }}
                         </h3>
-                        <p class="mt-1 line-clamp-1 text-sm text-brown-soft">
+                        <p class="mt-1 line-clamp-1 text-sm text-ink-soft">
                             {{ $review->body }}
                         </p>
-                        <p class="mt-1 text-xs text-brown-light">
+                        <p class="mt-1 text-xs text-ink-light">
                             {{ $review->created_at->format('d/m/Y') }}
                         </p>
                     </div>
@@ -98,7 +98,7 @@
                     </div>
 
                     <a href="{{ route('reviews.edit', $review) }}"
-                        class="inline-flex items-center rounded-pill border border-border bg-white px-4 py-2 text-sm font-semibold text-brown transition hover:border-primary/30 hover:text-primary">
+                        class="inline-flex items-center rounded-pill border border-border bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:border-primary/30 hover:text-primary">
                         Modifier
                     </a>
                 </div>
@@ -106,8 +106,8 @@
 
             @empty
             <div class="rounded-[2rem] border border-dashed border-border bg-white px-8 py-16 text-center shadow-soft">
-                <h3 class="font-display text-2xl font-bold text-brown">Pas encore d'avis</h3>
-                <p class="mx-auto mt-3 max-w-md text-brown-soft">
+                <h3 class="font-display text-2xl font-bold text-ink">Pas encore d'avis</h3>
+                <p class="mx-auto mt-3 max-w-md text-ink-soft">
                     Partage ta première expérience et aide la communauté à choisir les bons produits.
                 </p>
 

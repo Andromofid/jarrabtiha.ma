@@ -7,29 +7,29 @@
         <a href="/" class="flex items-center">
             <img
                 src="{{ asset('logo.png') }}"
-                class="h-12 w-auto"
+                class="h-20 w-auto"
                 alt="Jarrabtiha">
         </a>
 
         <div class="hidden items-center gap-10 lg:flex">
 
             <a href="{{ url('/') }}"
-                class="font-medium {{ request()->routeIs('welcome') || request()->is('/') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
+                class="font-medium {{ request()->routeIs('welcome') || request()->is('/') ? 'text-ink' : 'text-ink-soft' }} transition hover:text-primary">
                 Accueil
             </a>
 
             <a href="{{ route('products.index') }}"
-                class="font-medium {{ request()->routeIs('products.*') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
+                class="font-medium {{ request()->routeIs('products.*') ? 'text-ink' : 'text-ink-soft' }} transition hover:text-primary">
                 Produits
             </a>
 
             <a href="{{ route('categories.index') }}"
-                class="font-medium {{ request()->routeIs('categories.*') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
+                class="font-medium {{ request()->routeIs('categories.*') ? 'text-ink' : 'text-ink-soft' }} transition hover:text-primary">
                 Cat&eacute;gories
             </a>
 
             <a href="{{ route('brands.index') }}"
-                class="font-medium {{ request()->routeIs('brands.*') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
+                class="font-medium {{ request()->routeIs('brands.*') ? 'text-ink' : 'text-ink-soft' }} transition hover:text-primary">
                 Marques
             </a>
 
@@ -42,7 +42,7 @@
 
             <a
                 href="{{ route('login') }}"
-                class="rounded-pill border-2 border-[#B8845B] bg-white px-6 py-3 font-semibold text-[#B8845B]
+                class="rounded-pill border-2 border-primary-hover bg-white px-6 py-3 font-semibold text-primary-hover
                transition-all duration-300
                 hover:scale-[1.03] flex items-center gap-2">
 
@@ -51,7 +51,7 @@
                     height="24"
                     viewBox="0 0 24 24"
                     fill="none"
-                    class="text-[#B8845B]"
+                    class="text-primary-hover"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
                         fill-rule="evenodd"
@@ -67,10 +67,10 @@
             <a
                 href="{{ route('register') }}"
                 class="group relative overflow-hidden rounded-pill
-               bg-gradient-to-r from-primary to-[#B8845B]
+               bg-primary hover:bg-primary-hover
                px-6 py-3 font-semibold text-white shadow-soft
                transition-all duration-300
-               hover:scale-[1.03] hover:from-[#B8845B] hover:to-primary hover:shadow-card flex items-center gap-2">
+               hover:scale-[1.03] hover:shadow-card flex items-center gap-2">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7.25 6C7.25 3.37665 9.37665 1.25 12 1.25C14.6234 1.25 16.75 3.37665 16.75 6C16.75 8.62335 14.6234 10.75 12 10.75C9.37665 10.75 7.25 8.62335 7.25 6ZM12 2.75C10.2051 2.75 8.75 4.20507 8.75 6C8.75 7.79493 10.2051 9.25 12 9.25C13.7949 9.25 15.25 7.79493 15.25 6C15.25 4.20507 13.7949 2.75 12 2.75Z" fill="currentColor" />
                     <path d="M17.75 16.6667C17.75 16.2524 17.4142 15.9167 17 15.9167C16.5858 15.9167 16.25 16.2524 16.25 16.6667V17.25H15.6665C15.2523 17.25 14.9165 17.5858 14.9165 18C14.9165 18.4142 15.2523 18.75 15.6665 18.75H16.25V19.3333C16.25 19.7475 16.5858 20.0833 17 20.0833C17.4142 20.0833 17.75 19.7475 17.75 19.3333V18.75H18.3332C18.7474 18.75 19.0832 18.4142 19.0832 18C19.0832 17.5858 18.7474 17.25 18.3332 17.25H17.75V16.6667Z" fill="currentColor" />
@@ -85,7 +85,7 @@
 
             <a
                 href="{{ route('dashboard') }}"
-                class="group relative overflow-hidden rounded-pill bg-gradient-to-r from-primary to-[#B8845B] px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:scale-[1.03] hover:from-[#B8845B] hover:to-primary hover:shadow-card">
+                class="group relative overflow-hidden rounded-pill bg-primary hover:bg-primary-hover px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:scale-[1.03] hover:shadow-card">
                 <span class="relative z-10">Dashboard</span>
             </a>
 
@@ -94,7 +94,7 @@
 
                 <button
                     type="submit"
-                    class="group relative overflow-hidden rounded-pill bg-gradient-to-r from-danger to-[#B23A3A] px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:scale-[1.03] hover:from-[#B23A3A] hover:to-danger hover:shadow-card">
+                    class="group relative overflow-hidden rounded-pill bg-danger hover:bg-red-hover px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:scale-[1.03] hover:shadow-card">
                     <span class="relative z-10">Déconnexion</span>
                 </button>
             </form>
@@ -131,7 +131,7 @@
             <div class="flex items-center justify-between gap-3">
                 <a
                     href="{{ route('login') }}"
-                    class="rounded-pill px-5 py-3 font-medium text-brown hover:bg-primary-soft">
+                    class="rounded-pill px-5 py-3 font-medium text-ink hover:bg-primary-soft">
 
                     Connexion
 

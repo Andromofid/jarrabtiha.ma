@@ -14,22 +14,22 @@
         <div class="hidden items-center gap-10 lg:flex">
 
             <a href="{{ url('/') }}"
-                class="font-medium {{ request()->routeIs('welcome') || request()->is('/') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
+                class="font-medium {{ request()->routeIs('welcome') || request()->is('/') ? 'text-ink' : 'text-ink-soft' }} transition hover:text-primary">
                 Accueil
             </a>
 
             <a href="{{ route('products.index') }}"
-                class="font-medium {{ request()->routeIs('products.*') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
+                class="font-medium {{ request()->routeIs('products.*') ? 'text-ink' : 'text-ink-soft' }} transition hover:text-primary">
                 Produits
             </a>
 
             <a href="{{ route('categories.index') }}"
-                class="font-medium {{ request()->routeIs('categories.*') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
+                class="font-medium {{ request()->routeIs('categories.*') ? 'text-ink' : 'text-ink-soft' }} transition hover:text-primary">
                 Cat&eacute;gories
             </a>
 
             <a href="{{ route('brands.index') }}"
-                class="font-medium {{ request()->routeIs('brands.*') ? 'text-brown' : 'text-brown-soft' }} transition hover:text-primary">
+                class="font-medium {{ request()->routeIs('brands.*') ? 'text-ink' : 'text-ink-soft' }} transition hover:text-primary">
                 Marques
             </a>
 
@@ -42,7 +42,7 @@
 
             <a
                 href="{{ route('login') }}"
-                class="rounded-pill px-5 py-3 font-medium text-brown hover:bg-primary-soft">
+                class="rounded-pill px-5 py-3 font-medium text-ink hover:bg-primary-soft">
 
                 Connexion
 
@@ -51,7 +51,7 @@
             <a
 
                 href="{{ route('register') }}"
-                class="group relative overflow-hidden rounded-pill bg-gradient-to-r from-primary to-[#B8845B] px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-card hover:scale-[1.03] hover:from-[#B8845B] hover:to-primary">
+                class="group relative overflow-hidden rounded-pill bg-primary hover:bg-primary-hover px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-card hover:scale-[1.03]">
 
                 <span class="relative z-10">Rejoindre</span>
             </a>
@@ -107,7 +107,7 @@
             <div class="flex items-center justify-between gap-3">
                 <a
                     href="{{ route('login') }}"
-                    class="rounded-pill px-5 py-3 font-medium text-brown hover:bg-primary-soft">
+                    class="rounded-pill px-5 py-3 font-medium text-ink hover:bg-primary-soft">
 
                     Connexion
 

@@ -10,7 +10,7 @@
                     src="{{ asset('logo.png') }}"
                     class="h-12">
 
-                <p class="mt-5 text-sm leading-7 text-brown-soft">
+                <p class="mt-5 text-sm leading-7 text-ink-soft">
 
                     D&eacute;couvrez les vrais avis des femmes marocaines avant d'acheter vos produits beaut&eacute;.
 
@@ -20,13 +20,13 @@
 
             <div>
 
-                <h4 class="mb-4 font-semibold text-brown">
+                <h4 class="mb-4 font-semibold text-ink">
 
                     D&eacute;couvrir
 
                 </h4>
 
-                <ul class="space-y-3 text-brown-soft">
+                <ul class="space-y-3 text-ink-soft">
 
                     <li><a href="{{ route('products.index') }}">Produits</a></li>
                     <li><a href="{{ route('categories.index') }}">Cat&eacute;gories</a></li>
@@ -38,13 +38,13 @@
 
             <div>
 
-                <h4 class="mb-4 font-semibold text-brown">
+                <h4 class="mb-4 font-semibold text-ink">
 
                     Communaut&eacute;
 
                 </h4>
 
-                <ul class="space-y-3 text-brown-soft">
+                <ul class="space-y-3 text-ink-soft">
 
                     <li><a href="#">Ajouter un avis</a></li>
                     <li><a href="#">Connexion</a></li>
@@ -56,13 +56,13 @@
 
             <div>
 
-                <h4 class="mb-4 font-semibold text-brown">
+                <h4 class="mb-4 font-semibold text-ink">
 
                     Jarrabtiha
 
                 </h4>
 
-                <p class="text-brown-soft">
+                <p class="text-ink-soft">
 
                     Suivez-nous
 
@@ -80,7 +80,7 @@
 
         </div>
 
-        <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-brown-soft md:flex-row">
+        <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-ink-soft md:flex-row">
 
             <p>
 

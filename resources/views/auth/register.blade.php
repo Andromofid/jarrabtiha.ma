@@ -11,7 +11,7 @@
                     class="mx-auto h-20 w-auto transition duration-300 hover:scale-105">
             </a>
         </div>
-        <p class="mt-2 text-brown-soft">
+        <p class="mt-2 text-ink-soft">
             Rejoignez Jarrabtiha pour partager vos avis beauté.
         </p>
     </div>
@@ -84,7 +84,7 @@
 
         <button
             type="submit"
-            class="w-full rounded-xl bg-primary py-3 font-semibold text-white transition hover:bg-brown">
+            class="w-full rounded-xl bg-primary py-3 font-semibold text-white transition hover:bg-ink">
             Créer mon compte
         </button>
         <!-- retour -->
@@ -97,11 +97,11 @@
 
     <div class="my-8 flex items-center">
         <div class="h-px flex-1 bg-border"></div>
-        <span class="mx-4 text-sm text-brown-soft">ou</span>
+        <span class="mx-4 text-sm text-ink-soft">ou</span>
         <div class="h-px flex-1 bg-border"></div>
     </div>
 
-    <p class="text-center text-sm text-brown-soft">
+    <p class="text-center text-sm text-ink-soft">
         Vous avez déjà un compte ?
 
         <a

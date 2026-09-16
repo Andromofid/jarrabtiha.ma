@@ -2,50 +2,50 @@
     <div class="space-y-6">
         <section class="rounded-[1.75rem] border border-border bg-cream p-5 sm:p-6">
             <div class="mb-5">
-                <h3 class="text-xl font-semibold text-brown">Core details</h3>
-                <p class="mt-2 text-sm text-brown-soft">Set the main information visitors will see first.</p>
+                <h3 class="text-xl font-semibold text-ink">Core details</h3>
+                <p class="mt-2 text-sm text-ink-soft">Set the main information visitors will see first.</p>
             </div>
 
             <div class="grid gap-4 md:grid-cols-2">
                 <div>
-                    <label for="name" class="mb-2 block text-sm font-semibold text-brown">Name</label>
+                    <label for="name" class="mb-2 block text-sm font-semibold text-ink">Name</label>
                     <input
                         id="name"
                         type="text"
                         name="name"
                         value="{{ old('name', $product->name ?? '') }}"
                         required
-                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown focus:border-primary focus:ring-0">
+                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink focus:border-primary focus:ring-0">
                 </div>
 
                 <div>
-                    <label for="slug" class="mb-2 block text-sm font-semibold text-brown">Slug</label>
+                    <label for="slug" class="mb-2 block text-sm font-semibold text-ink">Slug</label>
                     <input
                         id="slug"
                         type="text"
                         name="slug"
                         value="{{ old('slug', $product->slug ?? '') }}"
                         placeholder="Auto-generated if empty"
-                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown placeholder:text-brown-light focus:border-primary focus:ring-0">
+                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink placeholder:text-ink-light focus:border-primary focus:ring-0">
                 </div>
 
                 <div>
-                    <label for="brand" class="mb-2 block text-sm font-semibold text-brown">Brand</label>
+                    <label for="brand" class="mb-2 block text-sm font-semibold text-ink">Brand</label>
                     <input
                         id="brand"
                         type="text"
                         name="brand"
                         value="{{ old('brand', $product->brand ?? '') }}"
-                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown focus:border-primary focus:ring-0">
+                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink focus:border-primary focus:ring-0">
                 </div>
 
                 <div>
-                    <label for="category_id" class="mb-2 block text-sm font-semibold text-brown">Category</label>
+                    <label for="category_id" class="mb-2 block text-sm font-semibold text-ink">Category</label>
                     <select
                         id="category_id"
                         name="category_id"
                         required
-                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown focus:border-primary focus:ring-0">
+                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink focus:border-primary focus:ring-0">
                         <option value="">Select a category</option>
                         @foreach ($categories as $categoryOption)
                             <option value="{{ $categoryOption->id }}" @selected((string) old('category_id', $product->category_id ?? '') === (string) $categoryOption->id)>
@@ -59,28 +59,28 @@
 
         <section class="rounded-[1.75rem] border border-border bg-cream p-5 sm:p-6">
             <div class="mb-5">
-                <h3 class="text-xl font-semibold text-brown">Content</h3>
-                <p class="mt-2 text-sm text-brown-soft">Give enough context to make this product easy to recognize.</p>
+                <h3 class="text-xl font-semibold text-ink">Content</h3>
+                <p class="mt-2 text-sm text-ink-soft">Give enough context to make this product easy to recognize.</p>
             </div>
 
             <div class="space-y-4">
                 <div>
-                    <label for="where_to_buy" class="mb-2 block text-sm font-semibold text-brown">Where to buy</label>
+                    <label for="where_to_buy" class="mb-2 block text-sm font-semibold text-ink">Where to buy</label>
                     <input
                         id="where_to_buy"
                         type="text"
                         name="where_to_buy"
                         value="{{ old('where_to_buy', $product->where_to_buy ?? '') }}"
                         placeholder="Optional product URL"
-                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown placeholder:text-brown-light focus:border-primary focus:ring-0">
+                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink placeholder:text-ink-light focus:border-primary focus:ring-0">
                 </div>
 
                 <div>
-                    <label for="description" class="mb-2 block text-sm font-semibold text-brown">Description</label>
+                    <label for="description" class="mb-2 block text-sm font-semibold text-ink">Description</label>
                     <textarea
                         id="description"
                         name="description"
-                        class="min-h-[180px] w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown focus:border-primary focus:ring-0">{{ old('description', $product->description ?? '') }}</textarea>
+                        class="min-h-[180px] w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink focus:border-primary focus:ring-0">{{ old('description', $product->description ?? '') }}</textarea>
                 </div>
             </div>
         </section>
@@ -89,8 +89,8 @@
     <div class="space-y-6">
         <section class="rounded-[1.75rem] border border-border bg-cream p-5 sm:p-6">
             <div class="mb-5">
-                <h3 class="text-xl font-semibold text-brown">Media</h3>
-                <p class="mt-2 text-sm text-brown-soft">Upload a product image to keep the catalog polished.</p>
+                <h3 class="text-xl font-semibold text-ink">Media</h3>
+                <p class="mt-2 text-sm text-ink-soft">Upload a product image to keep the catalog polished.</p>
             </div>
 
             <div class="space-y-4">
@@ -102,20 +102,20 @@
                 </div>
 
                 <div>
-                    <label for="image" class="mb-2 block text-sm font-semibold text-brown">Image</label>
+                    <label for="image" class="mb-2 block text-sm font-semibold text-ink">Image</label>
                     <input
                         id="image"
                         type="file"
                         name="image"
-                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown file:mr-4 file:rounded-full file:border-0 file:bg-primary-soft file:px-4 file:py-2 file:font-semibold file:text-primary">
+                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink file:mr-4 file:rounded-full file:border-0 file:bg-primary-soft file:px-4 file:py-2 file:font-semibold file:text-primary">
                 </div>
             </div>
         </section>
 
         <section class="rounded-[1.75rem] border border-border bg-cream p-5 sm:p-6">
             <div class="mb-5">
-                <h3 class="text-xl font-semibold text-brown">Visibility</h3>
-                <p class="mt-2 text-sm text-brown-soft">Control whether this product is ready to appear publicly.</p>
+                <h3 class="text-xl font-semibold text-ink">Visibility</h3>
+                <p class="mt-2 text-sm text-ink-soft">Control whether this product is ready to appear publicly.</p>
             </div>
 
             <label class="flex items-start gap-3 rounded-2xl border border-border bg-white p-4">
@@ -127,8 +127,8 @@
                     @checked(old('is_approved', $product->is_approved ?? true))
                     class="mt-1 rounded border-border text-primary focus:ring-primary">
                 <span>
-                    <span class="block text-sm font-semibold text-brown">Approved and visible</span>
-                    <span class="mt-1 block text-sm text-brown-soft">Keep this enabled when the product should appear in the public catalog.</span>
+                    <span class="block text-sm font-semibold text-ink">Approved and visible</span>
+                    <span class="mt-1 block text-sm text-ink-soft">Keep this enabled when the product should appear in the public catalog.</span>
                 </span>
             </label>
         </section>
@@ -138,7 +138,7 @@
 <div class="mt-8 flex flex-wrap gap-3 border-t border-border pt-6">
     <a
         href="{{ route('admin.products.index') }}"
-        class="inline-flex items-center justify-center rounded-pill border border-border bg-white px-5 py-3 text-sm font-semibold text-brown transition hover:border-primary/30 hover:text-primary">
+        class="inline-flex items-center justify-center rounded-pill border border-border bg-white px-5 py-3 text-sm font-semibold text-ink transition hover:border-primary/30 hover:text-primary">
         Cancel
     </a>
     <button

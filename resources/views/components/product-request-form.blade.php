@@ -4,10 +4,10 @@
             <span class="inline-flex rounded-full bg-primary-soft px-4 py-2 text-xs font-bold uppercase tracking-wide text-primary">
                 Produit introuvable ?
             </span>
-            <h2 class="mt-4 font-display text-3xl font-bold text-brown">
+            <h2 class="mt-4 font-display text-3xl font-bold text-ink">
                 Ajoute le produit pour qu'on puisse le vérifier
             </h2>
-            <p class="mt-3 text-sm leading-6 text-brown-soft">
+            <p class="mt-3 text-sm leading-6 text-ink-soft">
                 Si tu ne trouves pas ton produit, envoie ses informations ici. Il sera ajouté avec le statut en attente de validation avant d'apparaître publiquement.
             </p>
         </div>
@@ -18,7 +18,7 @@
 
         <div class="grid gap-5 md:grid-cols-2">
             <div>
-                <label for="suggested_name" class="mb-2 block text-sm font-semibold text-brown">
+                <label for="suggested_name" class="mb-2 block text-sm font-semibold text-ink">
                     Nom du produit
                 </label>
                 <input
@@ -27,12 +27,12 @@
                     type="text"
                     value="{{ old('name') }}"
                     required
-                    class="w-full rounded-2xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 text-sm text-brown focus:border-[#C9956C] focus:outline-none focus:ring-1 focus:ring-[#C9956C]"
+                    class="w-full rounded-2xl border border-border bg-cream px-4 py-3 text-sm text-ink focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     placeholder="Ex: CeraVe Gel Moussant">
             </div>
 
             <div>
-                <label for="suggested_brand" class="mb-2 block text-sm font-semibold text-brown">
+                <label for="suggested_brand" class="mb-2 block text-sm font-semibold text-ink">
                     Marque
                 </label>
                 <input
@@ -40,21 +40,21 @@
                     name="brand"
                     type="text"
                     value="{{ old('brand') }}"
-                    class="w-full rounded-2xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 text-sm text-brown focus:border-[#C9956C] focus:outline-none focus:ring-1 focus:ring-[#C9956C]"
+                    class="w-full rounded-2xl border border-border bg-cream px-4 py-3 text-sm text-ink focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     placeholder="Ex: CeraVe">
             </div>
         </div>
 
         <div class="grid gap-5 md:grid-cols-2">
             <div>
-                <label for="suggested_category_id" class="mb-2 block text-sm font-semibold text-brown">
+                <label for="suggested_category_id" class="mb-2 block text-sm font-semibold text-ink">
                     Catégorie
                 </label>
                 <select
                     id="suggested_category_id"
                     name="category_id"
                     required
-                    class="w-full rounded-2xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 text-sm text-brown focus:border-[#C9956C] focus:outline-none focus:ring-1 focus:ring-[#C9956C]">
+                    class="w-full rounded-2xl border border-border bg-cream px-4 py-3 text-sm text-ink focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
                     <option value="">Choisir une catégorie</option>
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @selected((string) old('category_id')===(string) $category->id)>
@@ -65,7 +65,7 @@
             </div>
 
             <div>
-                <label for="suggested_where_to_buy" class="mb-2 block text-sm font-semibold text-brown">
+                <label for="suggested_where_to_buy" class="mb-2 block text-sm font-semibold text-ink">
                     Lien du produit
                 </label>
                 <input
@@ -73,31 +73,31 @@
                     name="where_to_buy"
                     type="url"
                     value="{{ old('where_to_buy') }}"
-                    class="w-full rounded-2xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 text-sm text-brown focus:border-[#C9956C] focus:outline-none focus:ring-1 focus:ring-[#C9956C]"
+                    class="w-full rounded-2xl border border-border bg-cream px-4 py-3 text-sm text-ink focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     placeholder="https://...">
             </div>
         </div>
 
         <div>
-            <label for="suggested_description" class="mb-2 block text-sm font-semibold text-brown">
+            <label for="suggested_description" class="mb-2 block text-sm font-semibold text-ink">
                 Détails ou mini review
             </label>
             <textarea
                 id="suggested_description"
                 name="description"
                 rows="4"
-                class="w-full rounded-2xl border border-[#F2D0C4] bg-[#FDF8F5] px-4 py-3 text-sm text-brown focus:border-[#C9956C] focus:outline-none focus:ring-1 focus:ring-[#C9956C]"
+                class="w-full rounded-2xl border border-border bg-cream px-4 py-3 text-sm text-ink focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 placeholder="Ajoute des détails utiles pour reconnaître le produit ou partager un premier retour.">{{ old('description') }}</textarea>
         </div>
 
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p class="max-w-2xl text-sm text-brown-soft">
+            <p class="max-w-2xl text-sm text-ink-soft">
                 Le produit sera enregistré comme non approuvé jusqu'à validation par l'équipe.
             </p>
 
             <button
                 type="submit"
-                class="w-full rounded-2xl bg-[#C9956C] px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#3D1F1F] sm:w-auto">
+                class="w-full rounded-2xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-primary-hover sm:w-auto">
                 Envoyer le produit
             </button>
         </div>
@@ -108,7 +108,7 @@
     type="button"
     id="sticky-product-request-button"
     onclick="scrollToProductRequestForm()"
-    class="fixed bottom-4 left-4 right-4 z-50 rounded-pill bg-gradient-to-r from-primary to-[#B8845B] px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-card hover:scale-[1.03] hover:from-[#B8845B] hover:to-primary bg-primary-hover md:left-auto md:w-[300px]">
+    class="fixed bottom-4 left-4 right-4 z-50 rounded-pill bg-primary hover:bg-primary-hover px-6 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-card hover:scale-[1.03] md:left-auto md:w-[300px]">
 
     Produit introuvable ?
 </button>

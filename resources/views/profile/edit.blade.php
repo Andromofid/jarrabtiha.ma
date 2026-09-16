@@ -10,13 +10,13 @@
                     </div>
 
                     <div>
-                        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-brown-light">
+                        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-ink-light">
                             Espace personnel
                         </p>
-                        <h1 class="mt-2 font-display text-3xl font-bold text-brown sm:text-4xl">
+                        <h1 class="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">
                             Mon profil
                         </h1>
-                        <p class="mt-3 max-w-2xl text-sm leading-7 text-brown-soft sm:text-base">
+                        <p class="mt-3 max-w-2xl text-sm leading-7 text-ink-soft sm:text-base">
                             Gère tes informations de compte et vérifie rapidement quelles données peuvent être modifiées.
                         </p>
                     </div>
@@ -24,7 +24,7 @@
 
                 <div class="flex flex-wrap gap-3">
                     <a href="{{ route('dashboard') }}"
-                        class="rounded-pill border border-border bg-white px-6 py-3 text-sm font-semibold text-brown transition hover:border-primary/30 hover:text-primary">
+                        class="rounded-pill border border-border bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:border-primary/30 hover:text-primary">
                         Tableau de bord
                     </a>
 
@@ -38,20 +38,20 @@
 
         <section class="mt-8 grid gap-4 md:grid-cols-3">
             <div class="rounded-2xl border border-border bg-white p-6 shadow-soft">
-                <p class="text-sm text-brown-soft">Nom affiché</p>
-                <p class="mt-2 text-xl font-semibold text-brown">{{ $user->name }}</p>
+                <p class="text-sm text-ink-soft">Nom affiché</p>
+                <p class="mt-2 text-xl font-semibold text-ink">{{ $user->name }}</p>
             </div>
 
             <div class="rounded-2xl border border-border bg-white p-6 shadow-soft">
-                <p class="text-sm text-brown-soft">Connexion</p>
-                <p class="mt-2 text-xl font-semibold text-brown">
+                <p class="text-sm text-ink-soft">Connexion</p>
+                <p class="mt-2 text-xl font-semibold text-ink">
                     {{ $user->google_id ? 'Google' : 'Email et mot de passe' }}
                 </p>
             </div>
 
             <div class="rounded-2xl border border-border bg-white p-6 shadow-soft">
-                <p class="text-sm text-brown-soft">Adresse e-mail</p>
-                <p class="mt-2 break-all text-xl font-semibold text-brown">{{ $user->email }}</p>
+                <p class="text-sm text-ink-soft">Adresse e-mail</p>
+                <p class="mt-2 break-all text-xl font-semibold text-ink">{{ $user->email }}</p>
             </div>
         </section>
 

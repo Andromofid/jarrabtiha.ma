@@ -15,32 +15,32 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen bg-cream font-sans text-brown antialiased">
+<body class="min-h-screen bg-cream font-sans text-ink antialiased">
     <div class="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-6 py-12">
         <div class="absolute inset-x-0 top-0 -z-10 h-[28rem] bg-[radial-gradient(circle_at_top,_rgba(201,149,108,0.22),_transparent_55%)]"></div>
 
         <div class="grid w-full max-w-6xl gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <section class="hidden rounded-card border border-border bg-white/70 p-8 shadow-soft backdrop-blur lg:block xl:p-10">
                 <p class="text-sm font-semibold uppercase tracking-[0.28em] text-primary">Admin access</p>
-                <h1 class="mt-4 font-display text-5xl font-bold leading-tight text-brown">
+                <h1 class="mt-4 font-display text-5xl font-bold leading-tight text-ink">
                     Manage products, categories, and user activity in one place.
                 </h1>
-                <p class="mt-5 max-w-xl text-base leading-7 text-brown-soft">
+                <p class="mt-5 max-w-xl text-base leading-7 text-ink-soft">
                     Use the admin workspace to keep the catalog organized, review community activity, and maintain a polished experience across the site.
                 </p>
 
                 <div class="mt-8 grid gap-4 sm:grid-cols-3">
                     <div class="rounded-2xl border border-border bg-cream px-5 py-4">
-                        <p class="text-xs uppercase tracking-[0.18em] text-brown-light">Catalog</p>
-                        <p class="mt-2 text-sm font-semibold text-brown">Products and categories</p>
+                        <p class="text-xs uppercase tracking-[0.18em] text-ink-light">Catalog</p>
+                        <p class="mt-2 text-sm font-semibold text-ink">Products and categories</p>
                     </div>
                     <div class="rounded-2xl border border-border bg-cream px-5 py-4">
-                        <p class="text-xs uppercase tracking-[0.18em] text-brown-light">Community</p>
-                        <p class="mt-2 text-sm font-semibold text-brown">Users and reviews</p>
+                        <p class="text-xs uppercase tracking-[0.18em] text-ink-light">Community</p>
+                        <p class="mt-2 text-sm font-semibold text-ink">Users and reviews</p>
                     </div>
                     <div class="rounded-2xl border border-border bg-cream px-5 py-4">
-                        <p class="text-xs uppercase tracking-[0.18em] text-brown-light">Control</p>
-                        <p class="mt-2 text-sm font-semibold text-brown">Approval and moderation</p>
+                        <p class="text-xs uppercase tracking-[0.18em] text-ink-light">Control</p>
+                        <p class="mt-2 text-sm font-semibold text-ink">Approval and moderation</p>
                     </div>
                 </div>
             </section>
@@ -55,22 +55,22 @@
                                 class="h-20 w-auto transition duration-300 hover:scale-105">
                         </a>
                         <p class="mt-6 text-sm font-semibold uppercase tracking-[0.24em] text-primary">Admin sign in</p>
-                        <h2 class="mt-2 font-display text-4xl font-bold text-brown">Welcome back</h2>
-                        <p class="mt-3 text-sm text-brown-soft">
+                        <h2 class="mt-2 font-display text-4xl font-bold text-ink">Welcome back</h2>
+                        <p class="mt-3 text-sm text-ink-soft">
                             Sign in with your admin account to access the management dashboard.
                         </p>
                     </div>
 
                     @if (session('status'))
-                        <div class="mb-5 rounded-2xl border border-success/30 bg-success-soft px-4 py-3 text-sm text-brown shadow-soft">
+                        <div class="mb-5 rounded-2xl border border-success/30 bg-success-soft px-4 py-3 text-sm text-ink shadow-soft">
                             {{ session('status') }}
                         </div>
                     @endif
 
                     @if ($errors->any())
-                        <div class="mb-5 rounded-2xl border border-danger/30 bg-danger-soft px-4 py-3 text-sm text-brown shadow-soft">
+                        <div class="mb-5 rounded-2xl border border-danger/30 bg-danger-soft px-4 py-3 text-sm text-ink shadow-soft">
                             <p class="font-semibold">Please check your credentials.</p>
-                            <ul class="mt-2 space-y-1 text-brown-soft">
+                            <ul class="mt-2 space-y-1 text-ink-soft">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
@@ -82,7 +82,7 @@
                         @csrf
 
                         <div>
-                            <label for="email" class="mb-2 block text-sm font-semibold text-brown">Email address</label>
+                            <label for="email" class="mb-2 block text-sm font-semibold text-ink">Email address</label>
                             <input
                                 id="email"
                                 type="email"
@@ -90,20 +90,20 @@
                                 value="{{ old('email') }}"
                                 required
                                 autofocus
-                                class="w-full rounded-2xl border border-border bg-cream px-5 py-3 text-sm text-brown placeholder:text-brown-light outline-none transition focus:border-primary focus:ring-0">
+                                class="w-full rounded-2xl border border-border bg-cream px-5 py-3 text-sm text-ink placeholder:text-ink-light outline-none transition focus:border-primary focus:ring-0">
                         </div>
 
                         <div>
-                            <label for="password" class="mb-2 block text-sm font-semibold text-brown">Password</label>
+                            <label for="password" class="mb-2 block text-sm font-semibold text-ink">Password</label>
                             <input
                                 id="password"
                                 type="password"
                                 name="password"
                                 required
-                                class="w-full rounded-2xl border border-border bg-cream px-5 py-3 text-sm text-brown placeholder:text-brown-light outline-none transition focus:border-primary focus:ring-0">
+                                class="w-full rounded-2xl border border-border bg-cream px-5 py-3 text-sm text-ink placeholder:text-ink-light outline-none transition focus:border-primary focus:ring-0">
                         </div>
 
-                        <label class="flex items-center gap-3 text-sm text-brown-soft">
+                        <label class="flex items-center gap-3 text-sm text-ink-soft">
                             <input
                                 type="checkbox"
                                 name="remember"
@@ -118,7 +118,7 @@
                         </button>
                     </form>
 
-                    <p class="mt-8 text-center text-sm text-brown-soft">
+                    <p class="mt-8 text-center text-sm text-ink-soft">
                         Back to
                         <a href="{{ url('/') }}" class="font-semibold text-primary transition hover:text-primary-hover">
                             the main website

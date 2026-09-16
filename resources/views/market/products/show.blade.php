@@ -3,7 +3,7 @@
         <div class="mb-6">
             <a
                 href="{{ route('products.index') }}"
-                class="inline-flex items-center rounded-pill border border-border bg-white px-4 py-2 text-sm font-semibold text-brown shadow-soft transition hover:border-primary/30 hover:text-primary">
+                class="inline-flex items-center rounded-pill border border-border bg-white px-4 py-2 text-sm font-semibold text-ink shadow-soft transition hover:border-primary/30 hover:text-primary">
                 Retour aux produits
             </a>
         </div>
@@ -34,13 +34,13 @@
                         </span>
 
                         @if($product->category)
-                        <span class="hidden rounded-full bg-cream px-2.5 py-1 text-[10px] font-semibold text-brown-soft sm:inline-flex">
+                        <span class="hidden rounded-full bg-cream px-2.5 py-1 text-[10px] font-semibold text-ink-soft sm:inline-flex">
                             {{ $product->category->name }}
                         </span>
                         @endif
                     </p>
 
-                    <h1 class="mt-1 line-clamp-2 text-lg font-bold leading-tight text-brown sm:text-2xl md:text-3xl">
+                    <h1 class="mt-1 line-clamp-2 text-lg font-bold leading-tight text-ink sm:text-2xl md:text-3xl">
                         {{ $product->name }}
 
                     </h1>
@@ -56,11 +56,11 @@
                                 @endfor
                         </div>
 
-                        <span class="text-xs font-bold text-brown">
+                        <span class="text-xs font-bold text-ink">
                             {{ number_format($product->rating_avg ?? 0, 1) }}
                         </span>
 
-                        <span class="text-xs text-brown-soft">
+                        <span class="text-xs text-ink-soft">
                             ({{ $product->rating_count }} avis)
                         </span>
                     </div>
@@ -120,14 +120,14 @@
                             class="flex w-full items-center justify-between rounded-3xl border border-border bg-white px-5 py-4 text-left shadow-soft transition hover:border-primary/40">
 
                             <div>
-                                <p class="text-sm font-bold text-brown">Filtrer les avis</p>
-                                <p class="mt-1 text-xs text-brown-soft">
+                                <p class="text-sm font-bold text-ink">Filtrer les avis</p>
+                                <p class="mt-1 text-xs text-ink-soft">
                                     Note, tri et recommandations
                                 </p>
                             </div>
 
                             <svg
-                                class="h-5 w-5 text-brown-soft transition"
+                                class="h-5 w-5 text-ink-soft transition"
                                 :class="{ 'rotate-180': open }"
                                 fill="none"
                                 viewBox="0 0 24 24"
@@ -153,14 +153,14 @@
 
                                 {{-- Rating --}}
                                 <div>
-                                    <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-brown-soft">
+                                    <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-ink-soft">
                                         Note
                                     </p>
 
                                     <div class="grid grid-cols-3 gap-2 sm:grid-cols-6">
                                         <label class="cursor-pointer">
                                             <input type="radio" name="rating" value="" class="peer sr-only" @checked(request('rating')===null)>
-                                            <span class="flex justify-center rounded-pill border border-border bg-cream px-4 py-2.5 text-sm font-medium text-brown-soft transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                                            <span class="flex justify-center rounded-pill border border-border bg-cream px-4 py-2.5 text-sm font-medium text-ink-soft transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
                                                 Toutes
                                             </span>
                                         </label>
@@ -168,7 +168,7 @@
                                         @for ($i = 5; $i >= 1; $i--)
                                         <label class="cursor-pointer">
                                             <input type="radio" name="rating" value="{{ $i }}" class="peer sr-only" @checked(request('rating')==$i)>
-                                            <span class="flex justify-center gap-1 rounded-pill border border-border bg-cream px-4 py-2.5 text-sm font-medium text-brown-soft transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
+                                            <span class="flex justify-center gap-1 rounded-pill border border-border bg-cream px-4 py-2.5 text-sm font-medium text-ink-soft transition peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white">
                                                 {{ $i }} <span>★</span>
                                             </span>
                                         </label>
@@ -178,7 +178,7 @@
 
                                 {{-- Sort --}}
                                 <div>
-                                    <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-brown-soft">
+                                    <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-ink-soft">
                                         Trier
                                     </p>
 
@@ -191,7 +191,7 @@
                                         @foreach ($sorts as $value => $label)
                                         <label class="cursor-pointer">
                                             <input type="radio" name="sort" value="{{ $value }}" class="peer sr-only" @checked($activeSort===$value)>
-                                            <span class="flex justify-center rounded-pill px-4 py-2.5 text-sm font-medium text-brown-soft transition peer-checked:bg-primary peer-checked:text-white">
+                                            <span class="flex justify-center rounded-pill px-4 py-2.5 text-sm font-medium text-ink-soft transition peer-checked:bg-primary peer-checked:text-white">
                                                 {{ $label }}
                                             </span>
                                         </label>
@@ -201,7 +201,7 @@
 
                                 {{-- Recommend --}}
                                 <label class="flex cursor-pointer items-center justify-between rounded-2xl border border-border bg-cream px-4 py-3">
-                                    <span class="text-sm font-semibold text-brown">
+                                    <span class="text-sm font-semibold text-ink">
                                         Recommandé uniquement
                                     </span>
 
@@ -216,7 +216,7 @@
                                 <div class="flex items-center gap-3 border-t border-border pt-4">
                                     @if (request()->hasAny(['rating', 'sort', 'recommend']))
                                     <a href="{{ url()->current() }}"
-                                        class="flex-1 rounded-pill border border-border px-5 py-2.5 text-center text-sm font-semibold text-brown-soft transition hover:border-primary hover:text-primary">
+                                        class="flex-1 rounded-pill border border-border px-5 py-2.5 text-center text-sm font-semibold text-ink-soft transition hover:border-primary hover:text-primary">
                                         Réinitialiser
                                     </a>
                                     @endif
@@ -244,7 +244,7 @@
 
                             <div>
                                 <div class="flex flex-wrap items-center gap-2">
-                                    <h3 class="text-lg font-bold text-brown">
+                                    <h3 class="text-lg font-bold text-ink">
                                         {{ $review->user?->name ?? 'Membre de la communauté' }}
                                     </h3>
 
@@ -264,7 +264,7 @@
                                     </div>
                                 </div>
 
-                                <p class="mt-1 text-sm text-brown-soft">
+                                <p class="mt-1 text-sm text-ink-soft">
                                     {{ $review->created_at?->format('d/m/Y') }}
                                 </p>
                             </div>
@@ -272,12 +272,12 @@
                     </div>
 
 
-                    <p class="mt-3 text-[15px] leading-7 text-brown-soft">
+                    <p class="mt-3 text-[15px] leading-7 text-ink-soft">
                         {{ $review->body ?: 'Aucun détail supplémentaire n’a été partagé pour cet avis.' }}
                     </p>
 
                     <div class="mt-5 flex flex-wrap items-center gap-2">
-                        <span class="rounded-full border border-border bg-cream px-4 py-2 text-xs font-semibold text-brown-soft">
+                        <span class="rounded-full border border-border bg-cream px-4 py-2 text-xs font-semibold text-ink-soft">
                             Durée du test : {{ $review->result_duration_label }}
                         </span>
                     </div>
@@ -288,11 +288,11 @@
                         💬
                     </div>
 
-                    <h3 class="mt-5 text-2xl font-bold text-brown">
+                    <h3 class="mt-5 text-2xl font-bold text-ink">
                         Pas encore d’avis
                     </h3>
 
-                    <p class="mx-auto mt-3 max-w-xl text-brown-soft">
+                    <p class="mx-auto mt-3 max-w-xl text-ink-soft">
                         Ce produit attend encore ses premiers retours. Soyez la première à partager votre expérience.
                     </p>
                 </div>
@@ -311,7 +311,7 @@
             </div>
 
             <aside class="space-y-6">
-                <!-- <section class="rounded-2xl bg-brown p-6 text-white shadow-card">
+                <!-- <section class="rounded-2xl bg-ink p-6 text-white shadow-card">
                     <h2 class="text-2xl font-bold">جربتي شي منتج؟</h2>
                     <p class="mt-3 text-sm leading-6 text-white/70">
                         Partage ton avis et aide la communauté à choisir les bons produits.
@@ -326,7 +326,7 @@
 
                 <section>
                     <div class="mb-4">
-                        <h2 class="text-2xl font-bold text-brown">À voir aussi</h2>
+                        <h2 class="text-2xl font-bold text-ink">À voir aussi</h2>
                     </div>
 
                     <div class="space-y-3">
@@ -345,17 +345,17 @@
                                     {{ $relatedProduct->brand ?: 'Marque non précisée' }}
                                 </p>
 
-                                <h3 class="mt-1 line-clamp-2 text-sm font-semibold leading-5 text-brown">
+                                <h3 class="mt-1 line-clamp-2 text-sm font-semibold leading-5 text-ink">
                                     {{ $relatedProduct->name }}
                                 </h3>
 
-                                <p class="mt-2 text-xs text-brown-soft">
+                                <p class="mt-2 text-xs text-ink-soft">
                                     {{ number_format($relatedProduct->rating_avg ?? 0, 1) }}/5 • {{ $relatedProduct->rating_count }} avis
                                 </p>
                             </div>
                         </a>
                         @empty
-                        <div class="rounded-2xl border border-dashed border-border bg-white p-5 text-sm text-brown-soft shadow-soft">
+                        <div class="rounded-2xl border border-dashed border-border bg-white p-5 text-sm text-ink-soft shadow-soft">
                             Aucun produit similaire disponible pour le moment.
                         </div>
                         @endforelse

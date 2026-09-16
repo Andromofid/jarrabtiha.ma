@@ -11,7 +11,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen bg-cream text-brown font-sans antialiased">
+<body class="min-h-screen bg-cream text-ink font-sans antialiased">
     @include('layouts.navigation')
 
     <main class="mx-auto max-w-7xl px-6 py-16">
@@ -19,13 +19,13 @@
             <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                 <div>
                     <p class="text-sm font-semibold uppercase tracking-[0.22em] text-primary">Comparer</p>
-                    <h1 class="mt-4 font-display text-4xl font-bold text-brown sm:text-5xl">Toutes les marques</h1>
-                    <p class="mt-4 max-w-2xl text-lg text-brown-soft">
+                    <h1 class="mt-4 font-display text-4xl font-bold text-ink sm:text-5xl">Toutes les marques</h1>
+                    <p class="mt-4 max-w-2xl text-lg text-ink-soft">
                         Retrouve les marques disponibles sur la plateforme et ouvre directement leur catalogue pour lire les avis avant achat.
                     </p>
                 </div>
 
-                <div class="flex flex-wrap gap-4 text-sm text-brown-soft">
+                <div class="flex flex-wrap gap-4 text-sm text-ink-soft">
                     <span class="rounded-full border border-border bg-white px-4 py-2 shadow-soft">
                         {{ $brands->count() }} marques r&eacute;f&eacute;renc&eacute;es
                     </span>
@@ -39,8 +39,8 @@
         <section class="mt-12">
             @if ($brands->isEmpty())
                 <div class="rounded-[2rem] border border-dashed border-border bg-white px-8 py-16 text-center shadow-soft">
-                    <h2 class="font-display text-3xl font-bold text-brown">Aucune marque trouv&eacute;e</h2>
-                    <p class="mx-auto mt-4 max-w-xl text-brown-soft">
+                    <h2 class="font-display text-3xl font-bold text-ink">Aucune marque trouv&eacute;e</h2>
+                    <p class="mx-auto mt-4 max-w-xl text-ink-soft">
                         Les marques publiques appara&icirc;tront ici d&egrave;s que des produits approuv&eacute;s seront disponibles.
                     </p>
                 </div>
@@ -53,7 +53,7 @@
                             <div class="flex items-start justify-between gap-4">
                                 <div>
                                     <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Marque</p>
-                                    <h2 class="mt-3 font-display text-3xl font-bold text-brown transition group-hover:text-primary">
+                                    <h2 class="mt-3 font-display text-3xl font-bold text-ink transition group-hover:text-primary">
                                         {{ $brand->brand }}
                                     </h2>
                                 </div>
@@ -65,8 +65,8 @@
 
                             <div class="mt-6 flex items-center justify-between border-t border-border pt-4">
                                 <div>
-                                    <p class="text-sm text-brown-soft">Note moyenne cache</p>
-                                    <p class="mt-1 text-lg font-semibold text-brown">
+                                    <p class="text-sm text-ink-soft">Note moyenne cache</p>
+                                    <p class="mt-1 text-lg font-semibold text-ink">
                                         {{ number_format((float) $brand->average_rating, 1) }}/5
                                     </p>
                                 </div>

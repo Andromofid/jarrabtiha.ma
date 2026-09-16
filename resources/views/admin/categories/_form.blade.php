@@ -2,48 +2,48 @@
     <div class="space-y-6">
         <section class="rounded-[1.75rem] border border-border bg-cream p-5 sm:p-6">
             <div class="mb-5">
-                <h3 class="text-xl font-semibold text-brown">Core details</h3>
-                <p class="mt-2 text-sm text-brown-soft">Define the visible label and the URL-friendly identifier.</p>
+                <h3 class="text-xl font-semibold text-ink">Core details</h3>
+                <p class="mt-2 text-sm text-ink-soft">Define the visible label and the URL-friendly identifier.</p>
             </div>
 
             <div class="grid gap-4 md:grid-cols-2">
                 <div>
-                    <label for="name" class="mb-2 block text-sm font-semibold text-brown">Name</label>
+                    <label for="name" class="mb-2 block text-sm font-semibold text-ink">Name</label>
                     <input
                         id="name"
                         type="text"
                         name="name"
                         value="{{ old('name', $category->name ?? '') }}"
                         required
-                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown focus:border-primary focus:ring-0">
+                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink focus:border-primary focus:ring-0">
                 </div>
 
                 <div>
-                    <label for="slug" class="mb-2 block text-sm font-semibold text-brown">Slug</label>
+                    <label for="slug" class="mb-2 block text-sm font-semibold text-ink">Slug</label>
                     <input
                         id="slug"
                         type="text"
                         name="slug"
                         value="{{ old('slug', $category->slug ?? '') }}"
                         placeholder="Auto-generated if empty"
-                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown placeholder:text-brown-light focus:border-primary focus:ring-0">
+                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink placeholder:text-ink-light focus:border-primary focus:ring-0">
                 </div>
             </div>
         </section>
 
         <section class="rounded-[1.75rem] border border-border bg-cream p-5 sm:p-6">
             <div class="mb-5">
-                <h3 class="text-xl font-semibold text-brown">Structure</h3>
-                <p class="mt-2 text-sm text-brown-soft">Choose whether this category stands alone or sits under a parent.</p>
+                <h3 class="text-xl font-semibold text-ink">Structure</h3>
+                <p class="mt-2 text-sm text-ink-soft">Choose whether this category stands alone or sits under a parent.</p>
             </div>
 
             <div class="grid gap-4 md:grid-cols-2">
                 <div>
-                    <label for="parent_id" class="mb-2 block text-sm font-semibold text-brown">Parent category</label>
+                    <label for="parent_id" class="mb-2 block text-sm font-semibold text-ink">Parent category</label>
                     <select
                         id="parent_id"
                         name="parent_id"
-                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown focus:border-primary focus:ring-0">
+                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink focus:border-primary focus:ring-0">
                         <option value="">None</option>
                         @foreach ($parentCategories as $parentCategory)
                             <option value="{{ $parentCategory->id }}" @selected((string) old('parent_id', $category->parent_id ?? '') === (string) $parentCategory->id)>
@@ -54,14 +54,14 @@
                 </div>
 
                 <div>
-                    <label for="order" class="mb-2 block text-sm font-semibold text-brown">Order</label>
+                    <label for="order" class="mb-2 block text-sm font-semibold text-ink">Order</label>
                     <input
                         id="order"
                         type="number"
                         min="0"
                         name="order"
                         value="{{ old('order', $category->order ?? 0) }}"
-                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown focus:border-primary focus:ring-0">
+                        class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink focus:border-primary focus:ring-0">
                 </div>
             </div>
         </section>
@@ -70,25 +70,25 @@
     <div class="space-y-6">
         <section class="rounded-[1.75rem] border border-border bg-cream p-5 sm:p-6">
             <div class="mb-5">
-                <h3 class="text-xl font-semibold text-brown">Visual identifier</h3>
-                <p class="mt-2 text-sm text-brown-soft">Keep an icon token here if your front-end uses one for discovery or navigation.</p>
+                <h3 class="text-xl font-semibold text-ink">Visual identifier</h3>
+                <p class="mt-2 text-sm text-ink-soft">Keep an icon token here if your front-end uses one for discovery or navigation.</p>
             </div>
 
             <div>
-                <label for="icon" class="mb-2 block text-sm font-semibold text-brown">Icon</label>
+                <label for="icon" class="mb-2 block text-sm font-semibold text-ink">Icon</label>
                 <input
                     id="icon"
                     type="text"
                     name="icon"
                     value="{{ old('icon', $category->icon ?? '') }}"
                     placeholder="Optional icon class or identifier"
-                    class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-brown placeholder:text-brown-light focus:border-primary focus:ring-0">
+                    class="w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm text-ink placeholder:text-ink-light focus:border-primary focus:ring-0">
             </div>
         </section>
 
         <section class="rounded-[1.75rem] border border-border bg-cream p-5 sm:p-6">
-            <h3 class="text-xl font-semibold text-brown">Quick guidance</h3>
-            <div class="mt-5 space-y-3 text-sm text-brown-soft">
+            <h3 class="text-xl font-semibold text-ink">Quick guidance</h3>
+            <div class="mt-5 space-y-3 text-sm text-ink-soft">
                 <div class="rounded-2xl border border-border bg-white px-4 py-3">
                     Use root categories for broad top-level navigation.
                 </div>
@@ -106,7 +106,7 @@
 <div class="mt-8 flex flex-wrap gap-3 border-t border-border pt-6">
     <a
         href="{{ route('admin.categories.index') }}"
-        class="inline-flex items-center justify-center rounded-pill border border-border bg-white px-5 py-3 text-sm font-semibold text-brown transition hover:border-primary/30 hover:text-primary">
+        class="inline-flex items-center justify-center rounded-pill border border-border bg-white px-5 py-3 text-sm font-semibold text-ink transition hover:border-primary/30 hover:text-primary">
         Cancel
     </a>
     <button

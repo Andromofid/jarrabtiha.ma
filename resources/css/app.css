@@ -14,7 +14,7 @@
 }
 
 .ts-dropdown .active {
-    @apply bg-primary-soft text-brown;
+    @apply bg-primary-soft text-ink;
 }
 
 .ts-control input {

@@ -11,7 +11,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-primary-soft/30 via-[#FDFBF9] to-primary-soft/10 antialiased">
+<body class="min-h-screen bg-gradient-to-br from-primary-soft/30 via-cream to-primary-soft/10 antialiased">
 
     <div class="flex min-h-screen items-center justify-center px-6 py-12">
 
@@ -28,9 +28,9 @@
             </div>
 
             {{-- Footer --}}
-            <p class="mt-8 text-center text-sm text-brown-soft">
+            <p class="mt-8 text-center text-sm text-ink-soft">
                 © {{ now()->year }}
-                <span class="font-semibold text-brown">Jarrabtiha.ma</span>
+                <span class="font-semibold text-ink">Jarrabtiha.ma</span>
             </p>
 
         </div>

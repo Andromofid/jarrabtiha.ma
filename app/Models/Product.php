@@ -20,7 +20,10 @@ class Product extends Model
         'rating_avg',
         'rating_count',
         'is_approved',
+        'client_name',
+        'email',
         'created_by_client',
+
     ];
 
     protected function casts(): array
@@ -28,6 +31,7 @@ class Product extends Model
         return [
             'rating_avg'  => 'float',
             'is_approved' => 'boolean',
+            'created_by_client' => 'boolean',
         ];
     }
 

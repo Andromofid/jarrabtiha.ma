@@ -17,10 +17,12 @@ class ProductController extends Controller
     {
         $selectedCategory = $request->string('category')->toString();
         $selectedBrand = $request->string('brand')->trim()->toString();
+        $selectedCreatedByClient = $request->boolean('created_by_client');
 
         $products = Product::with('category')
             ->when($selectedCategory !== '', fn($query) => $query->where('category_id', $selectedCategory))
             ->when($selectedBrand !== '', fn($query) => $query->where('brand', $selectedBrand))
+            ->when($selectedCreatedByClient, fn($query) => $query->where('created_by_client', true))
             ->latest()
             ->get();
 

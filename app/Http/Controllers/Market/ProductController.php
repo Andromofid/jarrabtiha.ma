@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -142,9 +143,10 @@ class ProductController extends Controller
         $validated['slug'] = $this->generateUniqueSlug($validated['name']);
         $validated['is_approved'] = false;
         $validated['created_by_client'] = true;
-        // dd($validated);
-        Product::create($validated);
 
+        $product = Product::create($validated);
+        Notification::route('mail', $validated['email'])
+            ->notify(new \App\Notifications\ThankForAddProductNotification($product));
         return redirect()
             ->route('products.index')
             ->with('success', 'Produit ajouté avec succès. Il est maintenant en attente de validation.');

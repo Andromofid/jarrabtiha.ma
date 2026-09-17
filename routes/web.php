@@ -3,12 +3,8 @@
 use App\Http\Controllers\Market\LandingPageController;
 use App\Http\Controllers\Market\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\Review;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');

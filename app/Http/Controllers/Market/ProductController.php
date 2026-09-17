@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Market;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewProductSubmitted;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -147,6 +149,8 @@ class ProductController extends Controller
         $product = Product::create($validated);
         Notification::route('mail', $validated['email'])
             ->notify(new \App\Notifications\ThankForAddProductNotification($product));
+        Mail::to('jarrabtihama@gmail.com')
+            ->send(new NewProductSubmitted($product));
         return redirect()
             ->route('products.index')
             ->with('success', 'Produit ajouté avec succès. Il est maintenant en attente de validation.');

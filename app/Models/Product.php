@@ -20,6 +20,7 @@ class Product extends Model
         'rating_avg',
         'rating_count',
         'is_approved',
+        'created_by_client',
     ];
 
     protected function casts(): array

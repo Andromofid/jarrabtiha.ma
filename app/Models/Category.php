@@ -48,7 +48,7 @@ class Category extends Model
     /** Seulement les sous-catégories (niveau 2) */
     public function scopeChildrens($query)
     {
-        return $query->whereNotNull('parent_id')->orderBy('order');
+        return $query->whereNotNull('parent_id')->orderBy('name');
     }
 
     public function scopeOrdered($query)

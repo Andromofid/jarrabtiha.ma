@@ -19,6 +19,32 @@
 
         <div class="grid gap-4 md:grid-cols-2">
             <div>
+                <label for="client_name" class="mb-2 block text-sm font-semibold text-ink">
+                Votre nom et prénom  
+                </label>
+                <input
+                    id="client_name"
+                    name="client_name"
+                    type="text"
+                    value="{{ old('client_name') }}"
+                    required
+                    class="h-12 w-full rounded-2xl border border-border bg-cream px-4 text-sm text-ink focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    placeholder="Ex:Ahmed">
+            </div>
+            <div>
+                <label for="email" class="mb-2 block text-sm font-semibold text-ink">
+                Votre adresse email  
+                </label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value="{{ old('email') }}"
+                    required
+                    class="h-12 w-full rounded-2xl border border-border bg-cream px-4 text-sm text-ink focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    placeholder="Ex: ahmed@example.com ">
+            </div>
+            <div>
                 <label for="suggested_name" class="mb-2 block text-sm font-semibold text-ink">
                     Nom du produit
                 </label>
@@ -59,7 +85,7 @@
                     <option value="">Choisir une catégorie</option>
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @selected((string) old('category_id')===(string) $category->id)>
-                        {{ $category->parent?->name ? $category->parent->name . ' > ' : '' }}{{ $category->name }}
+                        {{ $category->name }}
                     </option>
                     @endforeach
                 </select>

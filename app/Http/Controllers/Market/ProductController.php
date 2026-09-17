@@ -35,7 +35,7 @@ class ProductController extends Controller
             ->paginate(12)
             ->withQueryString();
 
-        $categories = Category::childrens()->with('parent')->get();
+        $categories = Category::childrens()->get();
         $parentCategories = Category::parents()
             ->with('children')
             ->withCount('children')
@@ -135,11 +135,14 @@ class ProductController extends Controller
             'category_id' => ['required', 'exists:categories,id'],
             'where_to_buy' => ['nullable', 'url', 'max:255'],
             'description' => ['nullable', 'string', 'max:2000'],
+            'client_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
         ]);
 
         $validated['slug'] = $this->generateUniqueSlug($validated['name']);
         $validated['is_approved'] = false;
-
+        $validated['created_by_client'] = true;
+        // dd($validated);
         Product::create($validated);
 
         return redirect()

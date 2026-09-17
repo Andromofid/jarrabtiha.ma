@@ -31,6 +31,7 @@
                     <li><a href="{{ route('products.index') }}">Produits</a></li>
                     <li><a href="{{ route('categories.index') }}">Cat&eacute;gories</a></li>
                     <li><a href="{{ route('brands.index') }}">Marques</a></li>
+                    <li><a href="{{ route('contact') }}">Contact</a></li>
 
                 </ul>
 
@@ -94,7 +95,7 @@
 
                 <a href="#">Conditions</a>
 
-                <a href="#">Contact</a>
+                <a href="{{ route('contact') }}">Contact</a>
 
             </div>
 

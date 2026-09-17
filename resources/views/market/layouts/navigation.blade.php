@@ -33,6 +33,11 @@
                 Marques
             </a>
 
+            <a href="{{ route('contact') }}"
+                class="font-medium {{ request()->routeIs('contact') ? 'text-ink' : 'text-ink-soft' }} transition hover:text-primary">
+                Contact
+            </a>
+
 
         </div>
 
@@ -124,6 +129,7 @@
             <a href="{{ route('products.index') }}" class="block">Produits</a>
             <a href="{{ route('categories.index') }}" class="block">Cat&eacute;gories</a>
             <a href="{{ route('brands.index') }}" class="block">Marques</a>
+            <a href="{{ route('contact') }}" class="block">Contact</a>
 
             <hr>
 

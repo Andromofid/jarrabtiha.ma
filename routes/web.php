@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Market\LandingPageController;
 use App\Http\Controllers\Market\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -14,6 +15,10 @@ Route::post('/products/suggestions', [ProductController::class, 'storeSuggestion
 Route::get('/categories', [LandingPageController::class, 'categories'])->name('categories.index');
 Route::get('/brands', [LandingPageController::class, 'brands'])->name('brands.index');
 Route::get('/brands-by-category', [LandingPageController::class, 'brandsByCategory'])->name('brands.by.category');
+Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+Route::post('/contact', [ContactController::class, 'send'])
+    ->middleware('throttle:5,1')
+    ->name('contact.send');
 
 
 
